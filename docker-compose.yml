@@ -1,13 +1,15 @@
 # Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
-version: '3.1'
+version: "3.8"
+
 # Define services
 services:
+
   # PostgreSQL DataBase for the application
   russian-db:
-    image: "postgres:alpine"
+    image: postgres:alpine
     container_name: russian-db
     # Volume mounted for database for the storage
-    volumes: 
+    volumes:
       - russian-data:/var/lib/postgresql/data
     ports: 
       - 5000:5432 # Forward the exposed port 5432 on the container to port 5000 on the host machine
@@ -16,6 +18,7 @@ services:
       - POSTGRES_DB=cavalierfou
       - POSTGRES_USER=cavalierfou
       - POSTGRES_PASSWORD=db780345
+
   # Back-end Spring Boot Application
   russian-back:
     # The docker file in scrum-app build the jar and provides the docker image with the following name.
@@ -31,6 +34,8 @@ services:
       - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
     links: 
       - russian-db
+
 #Volumes for DB data
 volumes:
   russian-data:
+    driver: local
