@@ -31,6 +31,12 @@ public class PlayerGameHistory implements Serializable {
 	@Column(name="\"russian_adjective_id\"")
 	private long russianAdjectiveId;
 
+	@Column(name="\"russian_noun_ending_ref_id\"")
+	private long russianNounEndingRefId;
+
+	@Column(name="\"russian_noun_id\"")
+	private long russianNounId;
+
 	public PlayerGameHistory() {
 		// default constructor
 	}
@@ -73,6 +79,22 @@ public class PlayerGameHistory implements Serializable {
 
 	public void setRussianAdjectiveId(long russianAdjectiveId) {
 		this.russianAdjectiveId = russianAdjectiveId;
+	}
+
+	public long getRussianNounEndingRefId() {
+		return this.russianNounEndingRefId;
+	}
+
+	public void setRussianNounEndingRefId(long russianNounEndingRefId) {
+		this.russianNounEndingRefId = russianNounEndingRefId;
+	}
+
+	public long getRussianNounId() {
+		return this.russianNounId;
+	}
+
+	public void setRussianNounId(long russianNounId) {
+		this.russianNounId = russianNounId;
 	}
 
 }
