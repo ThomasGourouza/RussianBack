@@ -6,7 +6,7 @@ services:
 
   # PostgreSQL DataBase for the application
   russian-db:
-    image: postgres:alpine
+    image: thomasgourouza/rusiandb_with_data:latest
     container_name: russian-db
     # Volume mounted for database for the storage
     volumes:
@@ -18,6 +18,7 @@ services:
       - POSTGRES_DB=cavalierfou
       - POSTGRES_USER=cavalierfou
       - POSTGRES_PASSWORD=db780345
+      - PGDATA=postgres
 
   # Back-end Spring Boot Application
   russian-back:
