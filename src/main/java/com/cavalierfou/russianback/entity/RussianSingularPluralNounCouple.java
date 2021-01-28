@@ -25,18 +25,6 @@ public class RussianSingularPluralNounCouple implements Serializable {
 	@Column(name="\"russian_singular_noun_id\"")
 	private long russianSingularNounId;
 
-	//bi-directional many-to-one association to RussianNoun
-	@ManyToOne
-	@JoinColumns({
-		})
-	private RussianNoun russianNoun1;
-
-	//bi-directional many-to-one association to RussianNoun
-	@ManyToOne
-	@JoinColumns({
-		})
-	private RussianNoun russianNoun2;
-
 	public RussianSingularPluralNounCouple() {
 		// default constructor
 	}
@@ -63,22 +51,6 @@ public class RussianSingularPluralNounCouple implements Serializable {
 
 	public void setRussianSingularNounId(long russianSingularNounId) {
 		this.russianSingularNounId = russianSingularNounId;
-	}
-
-	public RussianNoun getRussianNoun1() {
-		return this.russianNoun1;
-	}
-
-	public void setRussianNoun1(RussianNoun russianNoun1) {
-		this.russianNoun1 = russianNoun1;
-	}
-
-	public RussianNoun getRussianNoun2() {
-		return this.russianNoun2;
-	}
-
-	public void setRussianNoun2(RussianNoun russianNoun2) {
-		this.russianNoun2 = russianNoun2;
 	}
 
 }
