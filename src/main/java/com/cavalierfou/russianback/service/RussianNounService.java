@@ -140,6 +140,7 @@ public class RussianNounService {
             jdbcRepository.delete(Constant.PGH.getValue(), Constant.RNI.getValue(), id.toString());
         }
 
+        jdbcRepository.delete(Constant.MRSNE.getValue(), Constant.RNI.getValue(), id.toString());
         dissociateSingularPlural(id);
         russianNounJpaRepository.deleteById(id);
     }
@@ -204,15 +205,15 @@ public class RussianNounService {
                     if (!Constant.NG.getValue().equals(russianNounEnding.getValue())) {
                         russianNounEndingRefCustoms.add(russianNounEndingRefCustom);
                     }
-                    if (Constant.NOM.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
+                    if (Constant.N.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
                         russianNounCustom
                                 .setNominativeForm(russianNounCustom.getRoot() + russianNounEndingRefCustom.getValue());
                         nominativeAccusativeGenitive[0] = russianNounEndingRefCustom.getValue();
                     }
-                    if (Constant.ACC.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
+                    if (Constant.A.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
                         nominativeAccusativeGenitive[1] = russianNounEndingRefCustom.getValue();
                     }
-                    if (Constant.GEN.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
+                    if (Constant.G.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
                         nominativeAccusativeGenitive[2] = russianNounEndingRefCustom.getValue();
                     }
                 });
@@ -220,7 +221,7 @@ public class RussianNounService {
         if (Constant.NG.getValue().equals(nominativeAccusativeGenitive[1])) {
 
             RussianNounEndingRefCustom russianNounEndingRefCustom = new RussianNounEndingRefCustom();
-            russianNounEndingRefCustom.setRussianCase(Constant.ACC.getValue());
+            russianNounEndingRefCustom.setRussianCase(Constant.A.getValue());
             russianNounEndingRefCustom.setValue(russianNounCustom.getIsAnimate() ? nominativeAccusativeGenitive[2]
                     : nominativeAccusativeGenitive[0]);
             russianNounEndingRefCustoms.add(russianNounEndingRefCustom);

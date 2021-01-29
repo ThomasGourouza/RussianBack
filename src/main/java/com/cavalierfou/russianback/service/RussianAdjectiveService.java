@@ -118,7 +118,7 @@ public class RussianAdjectiveService {
 
                 russianAdjectiveEndingRefCustoms.add(russianAdjectiveEndingRefCustom);
                 if (Constant.M.getValue().equals(russianAdjectiveEndingRefCustom.getRussianGender())
-                        && Constant.NOM.getValue().equals(russianAdjectiveEndingRefCustom.getRussianCase())
+                        && Constant.N.getValue().equals(russianAdjectiveEndingRefCustom.getRussianCase())
                         && existingRussianAdjectiveCategoryRefOptional.isPresent()) {
                     var russianAdjectiveCategoryRef = existingRussianAdjectiveCategoryRefOptional.get();
                     RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom = new RussianAdjectiveCategoryRefCustom();

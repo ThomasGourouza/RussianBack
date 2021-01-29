@@ -18,8 +18,8 @@ public class MemoryRussianSpecificNounEnding implements Serializable {
 	@Column(name="\"id\"")
 	private long id;
 
-	@Column(name="\"russian_noun_ending_ref_id\"")
-	private long russianNounEndingRefId;
+	@Column(name="\"russian_decl_spec_ending_ref_id\"")
+	private long russianDeclSpecEndingRefId;
 
 	@Column(name="\"russian_noun_id\"")
 	private long russianNounId;
@@ -39,12 +39,12 @@ public class MemoryRussianSpecificNounEnding implements Serializable {
 		this.id = id;
 	}
 
-	public long getRussianNounEndingRefId() {
-		return this.russianNounEndingRefId;
+	public long getRussianDeclSpecEndingRefId() {
+		return this.russianDeclSpecEndingRefId;
 	}
 
-	public void setRussianNounEndingRefId(long russianNounEndingRefId) {
-		this.russianNounEndingRefId = russianNounEndingRefId;
+	public void setRussianDeclSpecEndingRefId(long russianDeclSpecEndingRefId) {
+		this.russianDeclSpecEndingRefId = russianDeclSpecEndingRefId;
 	}
 
 	public long getRussianNounId() {

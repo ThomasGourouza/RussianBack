@@ -3,9 +3,9 @@ package com.cavalierfou.russianback.constant;
 public enum Constant {
 
     NG("N/G"), 
-    NOM("Nominative"), 
-    ACC("Accusative"),
-    GEN("Genitive"),
+    N("Nominative"), 
+    A("Accusative"),
+    G("Genitive"),
     RSPNC("russian_singular_plural_noun_couple"),
     RSPNCIS("russian_singular_plural_noun_couple_id_seq"),
     RN("russian_noun"),
@@ -23,7 +23,8 @@ public enum Constant {
     PGI("player_game_id"),
     PIS("player_id_seq"),
     PSL("player_spoken_language"),
-    PSLIS("player_spoken_language_id_seq");
+    PSLIS("player_spoken_language_id_seq"),
+    MRSNE("memory_russian_specific_noun_ending");
 
     private String value; 
   
