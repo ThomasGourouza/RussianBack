@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.cavalierfou.russianback.constant.Constant;
 import com.cavalierfou.russianback.customentity.PlayerCustom;
 import com.cavalierfou.russianback.customentity.PlayerSpokenLanguageCustom;
 import com.cavalierfou.russianback.entity.BirthCountryRef;
@@ -68,8 +69,8 @@ public class PlayerService {
     }
 
     public PlayerCustom save(Player player) {
-        jdbcRepository.resetSequence("player", "player_id_seq");
-        jdbcRepository.resetSequence("player_spoken_language", "player_spoken_language_id_seq");
+        jdbcRepository.resetSequence(Constant.P.getValue(), Constant.PIS.getValue());
+        jdbcRepository.resetSequence(Constant.PSL.getValue(), Constant.PSLIS.getValue());
 
         Player savedPlayer = playerJpaRepository.save(player);
         if (player.getPlayerSpokenLanguages() != null && !player.getPlayerSpokenLanguages().isEmpty()) {
@@ -101,11 +102,11 @@ public class PlayerService {
     }
 
     public void delete(Long id, boolean force) {
-        jdbcRepository.delete("player_spoken_language", "player_id", id.toString());
+        jdbcRepository.delete(Constant.PSL.getValue(), Constant.PI.getValue(), id.toString());
         if (force) {
-            jdbcRepository.delete("player_game_history", "player_game_id",
-                    "(select id from player_game where player_id = " + id.toString() + ")");
-            jdbcRepository.delete("player_game", "player_id", id.toString());
+            jdbcRepository.delete(Constant.PGH.getValue(), Constant.PGI.getValue(), "(select id from "
+                    + Constant.PG.getValue() + " where " + Constant.PI.getValue() + " = " + id.toString() + ")");
+            jdbcRepository.delete(Constant.PG.getValue(), Constant.PI.getValue(), id.toString());
         }
         playerJpaRepository.deleteById(id);
     }

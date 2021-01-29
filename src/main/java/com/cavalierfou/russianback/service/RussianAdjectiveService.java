@@ -3,6 +3,8 @@ package com.cavalierfou.russianback.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.cavalierfou.russianback.constant.Constant;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveCustom;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveEndingRefCustom;
@@ -57,7 +59,7 @@ public class RussianAdjectiveService {
     }
 
     public RussianAdjectiveCustom save(RussianAdjective russianAdjective) {
-        jdbcRepository.resetSequence("russian_adjective", "russian_adjective_id_seq");
+        jdbcRepository.resetSequence(Constant.RA.getValue(), Constant.RAIS.getValue());
 
         return mapToCustom(russianAdjectiveJpaRepository.save(russianAdjective));
     }
@@ -79,7 +81,7 @@ public class RussianAdjectiveService {
 
     public void delete(Long id, boolean force) {
         if (force) {
-            jdbcRepository.delete("player_game_history", "russian_adjective_id", id.toString());
+            jdbcRepository.delete(Constant.PGH.getValue(), Constant.RAI.getValue(), id.toString());
         }
         russianAdjectiveJpaRepository.deleteById(id);
     }
@@ -115,12 +117,13 @@ public class RussianAdjectiveService {
                 russianAdjectiveEndingRefCustom.setValue(existingRussianAdjectiveEndingRef.getValue());
 
                 russianAdjectiveEndingRefCustoms.add(russianAdjectiveEndingRefCustom);
-                if ("Masculine".equals(russianAdjectiveEndingRefCustom.getRussianGender())
-                        && "Nominative".equals(russianAdjectiveEndingRefCustom.getRussianCase())
+                if (Constant.M.getValue().equals(russianAdjectiveEndingRefCustom.getRussianGender())
+                        && Constant.NOM.getValue().equals(russianAdjectiveEndingRefCustom.getRussianCase())
                         && existingRussianAdjectiveCategoryRefOptional.isPresent()) {
                     var russianAdjectiveCategoryRef = existingRussianAdjectiveCategoryRefOptional.get();
                     RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom = new RussianAdjectiveCategoryRefCustom();
-                    russianAdjectiveCategoryRefCustom.setMasculineNominativeEnding(russianAdjectiveEndingRefCustom.getValue());
+                    russianAdjectiveCategoryRefCustom
+                            .setMasculineNominativeEnding(russianAdjectiveEndingRefCustom.getValue());
                     russianAdjectiveCategoryRefCustom.setValue(russianAdjectiveCategoryRef.getValue());
                     russianAdjectiveCustom.setRussianAdjectiveCategoryRefCustom(russianAdjectiveCategoryRefCustom);
                 }

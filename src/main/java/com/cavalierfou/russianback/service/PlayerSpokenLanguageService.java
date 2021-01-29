@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.cavalierfou.russianback.constant.Constant;
 import com.cavalierfou.russianback.customentity.PlayerSpokenLanguageCustom;
 import com.cavalierfou.russianback.entity.LanguageRef;
 import com.cavalierfou.russianback.entity.LevelRef;
@@ -58,7 +60,7 @@ public class PlayerSpokenLanguageService {
     }
 
     public List<PlayerSpokenLanguageCustom> save(List<PlayerSpokenLanguage> playerSpokenLanguages) {
-        jdbcRepository.resetSequence("player_spoken_language", "player_spoken_language_id_seq");
+        jdbcRepository.resetSequence(Constant.PSL.getValue(), Constant.PSLIS.getValue());
         List<PlayerSpokenLanguageCustom> playerSpokenLanguagesCustom = new ArrayList<>();
         if (playerSpokenLanguages != null && !playerSpokenLanguages.isEmpty()) {
             playerSpokenLanguages.forEach(playerSpokenLanguage -> playerSpokenLanguagesCustom

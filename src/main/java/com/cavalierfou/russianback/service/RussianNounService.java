@@ -3,15 +3,13 @@ package com.cavalierfou.russianback.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
+import com.cavalierfou.russianback.constant.Constant;
 import com.cavalierfou.russianback.customentity.RussianNounCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianNounCustom;
 import com.cavalierfou.russianback.customentity.RussianNounEndingRefCustom;
 import com.cavalierfou.russianback.entity.RussianNoun;
 import com.cavalierfou.russianback.entity.RussianNounCategoryRef;
-import com.cavalierfou.russianback.entity.RussianNounEndingRef;
 import com.cavalierfou.russianback.entity.RussianSingularPluralNounCouple;
 import com.cavalierfou.russianback.repository.JdbcRepository;
 import com.cavalierfou.russianback.repository.RussianCaseRefJpaRepository;
@@ -72,7 +70,7 @@ public class RussianNounService {
             RussianNounCustom russianNoun1 = mapToCustom(russianNouns.get(0));
             russianNounCustoms.add(russianNoun1);
 
-            boolean isSingular = "Singular".equals(russianNoun1.getRussianNounCategory().getRussianGrammaticalNumber());
+            boolean isSingular = Constant.S.getValue().equals(russianNoun1.getRussianNounCategory().getRussianGrammaticalNumber());
 
             var rns = isSingular ? rSPNCoupleJpaRepository.findByRussianSingularNounId(russianNoun1.getId())
                     : rSPNCoupleJpaRepository.findByRussianPluralNounId(russianNoun1.getId());
@@ -94,7 +92,7 @@ public class RussianNounService {
     }
 
     public RussianNounCustom save(RussianNoun russianNoun) {
-        jdbcRepository.resetSequence("russian_noun", "russian_noun_id_seq");
+        jdbcRepository.resetSequence(Constant.RN.getValue(), Constant.RNIS.getValue());
 
         return mapToCustom(russianNounJpaRepository.save(russianNoun));
 
@@ -112,8 +110,7 @@ public class RussianNounService {
 
         if (existingNounId1.isEmpty() && existingNounId2.isEmpty() && existingNounId3.isEmpty()
                 && existingNounId4.isEmpty()) {
-            jdbcRepository.resetSequence("russian_singular_plural_noun_couple",
-                    "russian_singular_plural_noun_couple_id_seq");
+            jdbcRepository.resetSequence(Constant.RSPNC.getValue(), Constant.RSPNCIS.getValue());
 
             rSPNCoupleJpaRepository.save(russianSingularPluralNounCouple);
 
@@ -140,7 +137,7 @@ public class RussianNounService {
 
     public void delete(Long id, boolean force) {
         if (force) {
-            jdbcRepository.delete("player_game_history", "russian_noun_id", id.toString());
+            jdbcRepository.delete(Constant.PGH.getValue(), Constant.RNI.getValue(), id.toString());
         }
 
         dissociateSingularPlural(id);
@@ -204,26 +201,26 @@ public class RussianNounService {
                             .ifPresent(data -> russianNounEndingRefCustom.setRussianCase(data.getValue()));
                     russianNounEndingRefCustom.setValue(russianNounEnding.getValue());
 
-                    if (!"N/G".equals(russianNounEnding.getValue())) {
+                    if (!Constant.NG.getValue().equals(russianNounEnding.getValue())) {
                         russianNounEndingRefCustoms.add(russianNounEndingRefCustom);
                     }
-                    if ("Nominative".equals(russianNounEndingRefCustom.getRussianCase())) {
+                    if (Constant.NOM.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
                         russianNounCustom
                                 .setNominativeForm(russianNounCustom.getRoot() + russianNounEndingRefCustom.getValue());
                         nominativeAccusativeGenitive[0] = russianNounEndingRefCustom.getValue();
                     }
-                    if ("Accusative".equals(russianNounEndingRefCustom.getRussianCase())) {
+                    if (Constant.ACC.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
                         nominativeAccusativeGenitive[1] = russianNounEndingRefCustom.getValue();
                     }
-                    if ("Genitive".equals(russianNounEndingRefCustom.getRussianCase())) {
+                    if (Constant.GEN.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
                         nominativeAccusativeGenitive[2] = russianNounEndingRefCustom.getValue();
                     }
                 });
 
-        if ("N/G".equals(nominativeAccusativeGenitive[1])) {
+        if (Constant.NG.getValue().equals(nominativeAccusativeGenitive[1])) {
 
             RussianNounEndingRefCustom russianNounEndingRefCustom = new RussianNounEndingRefCustom();
-            russianNounEndingRefCustom.setRussianCase("Accusative");
+            russianNounEndingRefCustom.setRussianCase(Constant.ACC.getValue());
             russianNounEndingRefCustom.setValue(russianNounCustom.getIsAnimate() ? nominativeAccusativeGenitive[2]
                     : nominativeAccusativeGenitive[0]);
             russianNounEndingRefCustoms.add(russianNounEndingRefCustom);

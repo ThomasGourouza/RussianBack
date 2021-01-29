@@ -1,9 +1,7 @@
 package com.cavalierfou.russianback.restcontroller;
 
 import java.util.List;
-
 import com.cavalierfou.russianback.customentity.RussianNounCustom;
-// import com.cavalierfou.russianback.customentity.RussianNounCustom;
 import com.cavalierfou.russianback.entity.RussianNoun;
 import com.cavalierfou.russianback.entity.RussianSingularPluralNounCouple;
 import com.cavalierfou.russianback.service.RussianNounService;
