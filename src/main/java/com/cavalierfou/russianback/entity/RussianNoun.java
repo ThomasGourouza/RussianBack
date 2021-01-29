@@ -46,7 +46,7 @@ public class RussianNoun implements Serializable {
 		return this.isAnimate;
 	}
 
-	public void setIsAnimate(boolean isAnimate) {
+	public void setAnimate(boolean isAnimate) {
 		this.isAnimate = isAnimate;
 	}
 
