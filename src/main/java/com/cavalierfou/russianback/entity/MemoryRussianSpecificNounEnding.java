@@ -24,9 +24,6 @@ public class MemoryRussianSpecificNounEnding implements Serializable {
 	@Column(name="\"russian_noun_id\"")
 	private long russianNounId;
 
-	@Column(name="\"value\"")
-	private String value;
-
 	public MemoryRussianSpecificNounEnding() {
 		// default constructor
 	}
@@ -53,14 +50,6 @@ public class MemoryRussianSpecificNounEnding implements Serializable {
 
 	public void setRussianNounId(long russianNounId) {
 		this.russianNounId = russianNounId;
-	}
-
-	public String getValue() {
-		return this.value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
 	}
 
 }
