@@ -2,6 +2,7 @@ package com.cavalierfou.russianback.restcontroller;
 
 import java.util.List;
 import com.cavalierfou.russianback.customentity.RussianNounCustom;
+import com.cavalierfou.russianback.entity.MemoryRussianSpecificNounEnding;
 import com.cavalierfou.russianback.entity.RussianNoun;
 import com.cavalierfou.russianback.entity.RussianSingularPluralNounCouple;
 import com.cavalierfou.russianback.service.RussianNounService;
@@ -92,12 +93,17 @@ class RussianNounController {
     @PostMapping("/singular_plural")
     public ResponseEntity<HttpStatus> associate(
             @RequestBody RussianSingularPluralNounCouple russianSingularPluralNounCouple) {
-        try {
-            return russianNounService.associateSingularPlural(russianSingularPluralNounCouple)
-                    ? new ResponseEntity<>(HttpStatus.CREATED)
-                    : new ResponseEntity<>(HttpStatus.CONFLICT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        if (russianNounService.isPresent(russianSingularPluralNounCouple.getRussianSingularNounId())
+                && russianNounService.isPresent(russianSingularPluralNounCouple.getRussianPluralNounId())) {
+            try {
+                return russianNounService.associateSingularPlural(russianSingularPluralNounCouple)
+                        ? new ResponseEntity<>(HttpStatus.CREATED)
+                        : new ResponseEntity<>(HttpStatus.CONFLICT);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -106,6 +112,36 @@ class RussianNounController {
         if (russianNounService.isCouplePresent(nounId)) {
             try {
                 russianNounService.dissociateSingularPlural(nounId);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/specific_rule")
+    public ResponseEntity<HttpStatus> saveRule(
+            @RequestBody MemoryRussianSpecificNounEnding memoryRussianSpecificNounEnding) {
+        if (russianNounService.isPresent(memoryRussianSpecificNounEnding.getRussianNounId())) {
+            try {
+                russianNounService.addRule(memoryRussianSpecificNounEnding);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/specific_rule/{noun_id}")
+    public ResponseEntity<HttpStatus> deleteRule(@PathVariable("noun_id") Long nounId,
+    @RequestParam(value = "spec_id", required = false) Long russianDeclSpecEndingRefId) {
+        if (russianNounService.isRulePresent(nounId)) {
+            try {
+                russianNounService.removeRule(nounId, russianDeclSpecEndingRefId);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);

@@ -9,6 +9,8 @@ import com.cavalierfou.russianback.customentity.RussianNounCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianNounCustom;
 import com.cavalierfou.russianback.customentity.RussianNounEndingRefCustom;
 import com.cavalierfou.russianback.customentity.RussianDeclSpecEndingRefCustom;
+import com.cavalierfou.russianback.entity.MemoryRussianSpecificNounEnding;
+import com.cavalierfou.russianback.entity.RussianDeclSpecEndingRef;
 import com.cavalierfou.russianback.entity.RussianNoun;
 import com.cavalierfou.russianback.entity.RussianNounCategoryRef;
 import com.cavalierfou.russianback.entity.RussianSingularPluralNounCouple;
@@ -109,28 +111,6 @@ public class RussianNounService {
 
     }
 
-    public boolean associateSingularPlural(RussianSingularPluralNounCouple russianSingularPluralNounCouple) {
-
-        Long singularNounId = russianSingularPluralNounCouple.getRussianSingularNounId();
-        Long pluralNounId = russianSingularPluralNounCouple.getRussianPluralNounId();
-
-        var existingNounId1 = rSPNCoupleJpaRepository.findByRussianSingularNounId(singularNounId);
-        var existingNounId2 = rSPNCoupleJpaRepository.findByRussianSingularNounId(pluralNounId);
-        var existingNounId3 = rSPNCoupleJpaRepository.findByRussianPluralNounId(singularNounId);
-        var existingNounId4 = rSPNCoupleJpaRepository.findByRussianPluralNounId(pluralNounId);
-
-        if (existingNounId1.isEmpty() && existingNounId2.isEmpty() && existingNounId3.isEmpty()
-                && existingNounId4.isEmpty()) {
-            jdbcRepository.resetSequence(Constant.RSPNC.getValue(), Constant.RSPNCIS.getValue());
-
-            rSPNCoupleJpaRepository.save(russianSingularPluralNounCouple);
-
-            return true;
-        }
-
-        return false;
-    }
-
     public RussianNoun update(Long id, RussianNoun updatedRussianNoun) {
         Optional<RussianNoun> russianNounToUpdateOptional = russianNounJpaRepository.findById(id);
         if (russianNounToUpdateOptional.isPresent()) {
@@ -153,17 +133,29 @@ public class RussianNounService {
 
         jdbcRepository.delete(Constant.MRSNE.getValue(), Constant.RNI.getValue(), id.toString());
         dissociateSingularPlural(id);
+        removeRule(id, null);
         russianNounJpaRepository.deleteById(id);
     }
 
-    public boolean isPresent(Long id) {
-        return russianNounJpaRepository.findById(id).isPresent();
-    }
+    public boolean associateSingularPlural(RussianSingularPluralNounCouple russianSingularPluralNounCouple) {
+        Long singularNounId = russianSingularPluralNounCouple.getRussianSingularNounId();
+        Long pluralNounId = russianSingularPluralNounCouple.getRussianPluralNounId();
 
-    public boolean isCouplePresent(Long nounId) {
+        var existingNounId1 = rSPNCoupleJpaRepository.findByRussianSingularNounId(singularNounId);
+        var existingNounId2 = rSPNCoupleJpaRepository.findByRussianSingularNounId(pluralNounId);
+        var existingNounId3 = rSPNCoupleJpaRepository.findByRussianPluralNounId(singularNounId);
+        var existingNounId4 = rSPNCoupleJpaRepository.findByRussianPluralNounId(pluralNounId);
 
-        return !rSPNCoupleJpaRepository.findByRussianSingularNounId(nounId).isEmpty()
-                || !rSPNCoupleJpaRepository.findByRussianPluralNounId(nounId).isEmpty();
+        if (existingNounId1.isEmpty() && existingNounId2.isEmpty() && existingNounId3.isEmpty()
+                && existingNounId4.isEmpty()) {
+            jdbcRepository.resetSequence(Constant.RSPNC.getValue(), Constant.RSPNCIS.getValue());
+
+            rSPNCoupleJpaRepository.save(russianSingularPluralNounCouple);
+
+            return true;
+        }
+
+        return false;
     }
 
     public void dissociateSingularPlural(Long nounId) {
@@ -178,6 +170,37 @@ public class RussianNounService {
         }
     }
 
+    public void addRule(MemoryRussianSpecificNounEnding memoryRussianSpecificNounEnding) {
+        jdbcRepository.resetSequence(Constant.MRSNE.getValue(), Constant.MRSNEIS.getValue());
+
+        memoryRSNEndingJpaRepository.save(memoryRussianSpecificNounEnding);
+    }
+
+    public void removeRule(Long nounId, Long russianDeclSpecEndingRefId) {
+        if (russianDeclSpecEndingRefId != null) {
+            memoryRSNEndingJpaRepository
+                    .findByRussianNounIdAndRussianDeclSpecEndingRefId(nounId, russianDeclSpecEndingRefId)
+                    .forEach(memory -> memoryRSNEndingJpaRepository.deleteById(memory.getId()));
+        } else {
+            memoryRSNEndingJpaRepository.findByRussianNounId(nounId)
+                    .forEach(memory -> memoryRSNEndingJpaRepository.deleteById(memory.getId()));
+        }
+    }
+
+    public boolean isPresent(Long id) {
+        return russianNounJpaRepository.findById(id).isPresent();
+    }
+
+    public boolean isCouplePresent(Long nounId) {
+
+        return !rSPNCoupleJpaRepository.findByRussianSingularNounId(nounId).isEmpty()
+                || !rSPNCoupleJpaRepository.findByRussianPluralNounId(nounId).isEmpty();
+    }
+
+    public boolean isRulePresent(Long nounId) {
+        return !memoryRSNEndingJpaRepository.findByRussianNounId(nounId).isEmpty();
+    }
+
     public RussianNounCustom mapToCustom(RussianNoun russianNoun) {
         Optional<RussianNounCategoryRef> existingRussianNounCategoryRefOptional = russianNounCategoryRefJpaRepository
                 .findById(russianNoun.getRussianNounCategoryRefId());
@@ -187,23 +210,10 @@ public class RussianNounService {
         russianNounCustom.setAnimate(russianNoun.getIsAnimate());
         russianNounCustom.setRoot(russianNoun.getRoot());
         russianNounCustom.setTranslation(russianNoun.getTranslation());
-
-        if (existingRussianNounCategoryRefOptional.isPresent()) {
-            var rncr = existingRussianNounCategoryRefOptional.get();
-            RussianNounCategoryRefCustom russianNounCategoryRefCustom = new RussianNounCategoryRefCustom();
-            russianDeclCatTypeRefJpaRepository.findById(rncr.getRussianDeclCatTypeRefId())
-                    .ifPresent(data -> russianNounCategoryRefCustom.setRussianDeclCatType(data.getValue()));
-            russianDeclensionNameRefJpaRepository.findById(rncr.getRussianDeclensionNameRefId())
-                    .ifPresent(data -> russianNounCategoryRefCustom.setRussianDeclensionName(data.getValue()));
-            russianGenderRefJpaRepository.findById(rncr.getRussianGenderRefId())
-                    .ifPresent(data -> russianNounCategoryRefCustom.setRussianGender(data.getValue()));
-            rGNumberRefJpaRepository.findById(rncr.getRussianGrammaticalNumberRefId())
-                    .ifPresent(data -> russianNounCategoryRefCustom.setRussianGrammaticalNumber(data.getValue()));
-            russianNounCustom.setRussianNounCategory(russianNounCategoryRefCustom);
-        }
+        existingRussianNounCategoryRefOptional
+                .ifPresent(rncr -> russianNounCustom.setRussianNounCategory(mapRNCRC(rncr)));
 
         List<RussianNounEndingRefCustom> russianNounEndingRefCustoms = new ArrayList<>();
-
         String[] nominativeAccusativeGenitive = new String[3];
 
         russianNounEndingRefJpaRepository.findByRussianNounCategoryRefId(russianNoun.getRussianNounCategoryRefId())
@@ -212,28 +222,8 @@ public class RussianNounService {
                     RussianNounEndingRefCustom russianNounEndingRefCustom = new RussianNounEndingRefCustom();
 
                     List<RussianDeclSpecEndingRefCustom> russianDeclSpecEndingRefs = rDSEndingRefJpaRepository
-                            .findByRussianNounEndingRefId(russianNounEnding.getId()).stream().map(rdser -> {
-
-                                RussianDeclSpecEndingRefCustom rdserCustom = new RussianDeclSpecEndingRefCustom();
-                                rdserCustom.setId(rdser.getId());
-
-                                if (!Constant.NG.getValue().equals(rdser.getValue())) {
-                                    rdserCustom.setValue(rdser.getValue());
-                                    rdserCustom.setApplied(!memoryRSNEndingJpaRepository
-                                            .findByRussianNounIdAndRussianDeclSpecEndingRefId(russianNoun.getId(),
-                                                    rdser.getId())
-                                            .isEmpty());
-                                } else {
-                                    // I don't put any value for now
-                                    rdserCustom.setApplied(true);
-                                }
-
-                                rDSRuleRefJpaRepository.findById(rdser.getRussianDeclSpecRuleRefId())
-                                        .ifPresent(rule -> rdserCustom.setRule(rule.getValue()));
-
-                                return rdserCustom;
-
-                            }).collect(Collectors.toList());
+                            .findByRussianNounEndingRefId(russianNounEnding.getId()).stream()
+                            .map(rdser -> mapRDSERC(rdser, russianNoun.getId())).collect(Collectors.toList());
 
                     russianNounEndingRefCustom.setSpecificEndingRules(russianDeclSpecEndingRefs);
                     russianCaseRefJpaRepository.findById(russianNounEnding.getRussianCaseRefId())
@@ -269,10 +259,41 @@ public class RussianNounService {
                             .setValue(russianNounCustom.getIsAnimate() ? nominativeAccusativeGenitive[2]
                                     : nominativeAccusativeGenitive[0]));
         }
-
         russianNounCustom.setRussianNounEndings(russianNounEndingRefCustoms);
 
         return russianNounCustom;
+    }
+
+    public RussianNounCategoryRefCustom mapRNCRC(RussianNounCategoryRef rncr) {
+        RussianNounCategoryRefCustom russianNounCategoryRefCustom = new RussianNounCategoryRefCustom();
+        russianDeclCatTypeRefJpaRepository.findById(rncr.getRussianDeclCatTypeRefId())
+                .ifPresent(data -> russianNounCategoryRefCustom.setRussianDeclCatType(data.getValue()));
+        russianDeclensionNameRefJpaRepository.findById(rncr.getRussianDeclensionNameRefId())
+                .ifPresent(data -> russianNounCategoryRefCustom.setRussianDeclensionName(data.getValue()));
+        russianGenderRefJpaRepository.findById(rncr.getRussianGenderRefId())
+                .ifPresent(data -> russianNounCategoryRefCustom.setRussianGender(data.getValue()));
+        rGNumberRefJpaRepository.findById(rncr.getRussianGrammaticalNumberRefId())
+                .ifPresent(data -> russianNounCategoryRefCustom.setRussianGrammaticalNumber(data.getValue()));
+        return russianNounCategoryRefCustom;
+    }
+
+    public RussianDeclSpecEndingRefCustom mapRDSERC(RussianDeclSpecEndingRef rdser, Long nounId) {
+        RussianDeclSpecEndingRefCustom rdserCustom = new RussianDeclSpecEndingRefCustom();
+        rdserCustom.setId(rdser.getId());
+
+        if (!Constant.NG.getValue().equals(rdser.getValue())) {
+            rdserCustom.setValue(rdser.getValue());
+            rdserCustom.setApplied(!memoryRSNEndingJpaRepository
+                    .findByRussianNounIdAndRussianDeclSpecEndingRefId(nounId, rdser.getId()).isEmpty());
+        } else {
+            // I don't put any value for now
+            rdserCustom.setApplied(true);
+        }
+
+        rDSRuleRefJpaRepository.findById(rdser.getRussianDeclSpecRuleRefId())
+                .ifPresent(rule -> rdserCustom.setRule(rule.getValue()));
+
+        return rdserCustom;
     }
 
 }

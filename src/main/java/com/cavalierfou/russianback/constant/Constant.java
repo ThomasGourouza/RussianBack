@@ -24,7 +24,8 @@ public enum Constant {
     PIS("player_id_seq"),
     PSL("player_spoken_language"),
     PSLIS("player_spoken_language_id_seq"),
-    MRSNE("memory_russian_specific_noun_ending");
+    MRSNE("memory_russian_specific_noun_ending"),
+    MRSNEIS("memory_russian_specific_noun_ending_id_seq");
 
     private String value; 
   

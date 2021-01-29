@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface MemoryRussianSpecificNounEndingJpaRepository extends JpaRepository<MemoryRussianSpecificNounEnding, Long> {
 
     public List<MemoryRussianSpecificNounEnding> findByRussianNounIdAndRussianDeclSpecEndingRefId(Long russianNounId, Long russianDeclSpecEndingRefId);
+    public List<MemoryRussianSpecificNounEnding> findByRussianNounId(Long russianNounId);
 
 }
