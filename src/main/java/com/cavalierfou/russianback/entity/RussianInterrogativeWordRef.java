@@ -5,13 +5,13 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the "russian_interrogative_word" database table.
+ * The persistent class for the "russian_interrogative_word_ref" database table.
  * 
  */
 @Entity
-@Table(name="\"russian_interrogative_word\"")
-@NamedQuery(name="RussianInterrogativeWord.findAll", query="SELECT r FROM RussianInterrogativeWord r")
-public class RussianInterrogativeWord implements Serializable {
+@Table(name="\"russian_interrogative_word_ref\"")
+@NamedQuery(name="RussianInterrogativeWordRef.findAll", query="SELECT r FROM RussianInterrogativeWordRef r")
+public class RussianInterrogativeWordRef implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -28,7 +28,8 @@ public class RussianInterrogativeWord implements Serializable {
 	@Column(name="\"value\"")
 	private String value;
 
-	public RussianInterrogativeWord() {
+	public RussianInterrogativeWordRef() {
+		// default constructor
 	}
 
 	public long getId() {

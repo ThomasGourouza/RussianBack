@@ -1,6 +1,5 @@
 package com.cavalierfou.russianback.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class RussianNounService {
 
     @Autowired
-    private ReferenceService referenceService;
+    private RussianReferenceService russianReferenceService;
     @Autowired
     private RussianNounJpaRepository russianNounJpaRepository;
     @Autowired
@@ -159,7 +158,7 @@ public class RussianNounService {
         russianNounCustom.setRoot(russianNoun.getRoot());
         russianNounCustom.setTranslation(russianNoun.getTranslation());
         existingRussianNounCategoryRefOptional.ifPresent(rncr -> russianNounCustom.setRussianNounCategory(
-                referenceService.mapRNCRC(rncr, russianNounCustom, russianNounCustom.getIsAnimate())));
+                russianReferenceService.mapRNCRC(rncr, russianNounCustom, russianNounCustom.getIsAnimate())));
 
         boolean isSingular = Constant.S.getValue()
                 .equals(russianNounCustom.getRussianNounCategory().getRussianGrammaticalNumber());

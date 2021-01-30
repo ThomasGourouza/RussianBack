@@ -14,6 +14,7 @@ import com.cavalierfou.russianback.entity.RussianDeclSpecEndingRef;
 import com.cavalierfou.russianback.entity.RussianDeclensionNameRef;
 import com.cavalierfou.russianback.entity.RussianGenderRef;
 import com.cavalierfou.russianback.entity.RussianGrammaticalNumberRef;
+import com.cavalierfou.russianback.entity.RussianInterrogativeWordRef;
 import com.cavalierfou.russianback.entity.RussianNounCategoryRef;
 import com.cavalierfou.russianback.repository.MemoryRussianSpecificNounEndingJpaRepository;
 import com.cavalierfou.russianback.repository.RussianCaseRefJpaRepository;
@@ -23,13 +24,14 @@ import com.cavalierfou.russianback.repository.RussianDeclSpecRuleRefJpaRepositor
 import com.cavalierfou.russianback.repository.RussianDeclensionNameRefJpaRepository;
 import com.cavalierfou.russianback.repository.RussianGenderRefJpaRepository;
 import com.cavalierfou.russianback.repository.RussianGrammaticalNumberRefJpaRepository;
+import com.cavalierfou.russianback.repository.RussianInterrogativeWordJpaRepository;
 import com.cavalierfou.russianback.repository.RussianNounCategoryRefJpaRepository;
 import com.cavalierfou.russianback.repository.RussianNounEndingRefJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReferenceService {
+public class RussianReferenceService {
 
     @Autowired
     private RussianDeclCatTypeRefJpaRepository rDCTypeRefJpaRepository;
@@ -57,6 +59,8 @@ public class ReferenceService {
     private RussianDeclSpecRuleRefJpaRepository rDSRuleRefJpaRepository;
     @Autowired
     private MemoryRussianSpecificNounEndingJpaRepository memoryRSNEndingJpaRepository;
+    @Autowired
+    private RussianInterrogativeWordJpaRepository rInterrogativeWordJpaRepository;
 
     public List<RussianDeclCatTypeRef> findDeclCatType() {
         return rDCTypeRefJpaRepository.findAll();
@@ -92,6 +96,10 @@ public class ReferenceService {
         } else {
             return null;
         }
+    }
+
+    public List<RussianInterrogativeWordRef> findInterrogativeWord() {
+        return rInterrogativeWordJpaRepository.findAll();
     }
 
     public RussianNounCategoryRefCustom mapRNCRC(RussianNounCategoryRef rncr, RussianNounCustom russianNounCustom,
