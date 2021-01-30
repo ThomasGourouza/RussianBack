@@ -5,29 +5,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import com.cavalierfou.russianback.constant.Constant;
-import com.cavalierfou.russianback.customentity.RussianNounCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianNounCustom;
-import com.cavalierfou.russianback.customentity.RussianNounEndingRefCustom;
-import com.cavalierfou.russianback.customentity.RussianDeclSpecEndingRefCustom;
 import com.cavalierfou.russianback.entity.MemoryRussianSpecificNounEnding;
-import com.cavalierfou.russianback.entity.RussianDeclSpecEndingRef;
 import com.cavalierfou.russianback.entity.RussianNoun;
 import com.cavalierfou.russianback.entity.RussianNounCategoryRef;
 import com.cavalierfou.russianback.entity.RussianSingularPluralNounCouple;
 import com.cavalierfou.russianback.repository.JdbcRepository;
 import com.cavalierfou.russianback.repository.MemoryRussianSpecificNounEndingJpaRepository;
-import com.cavalierfou.russianback.repository.RussianCaseRefJpaRepository;
 import com.cavalierfou.russianback.repository.RussianNounCategoryRefJpaRepository;
-import com.cavalierfou.russianback.repository.RussianNounEndingRefJpaRepository;
 import com.cavalierfou.russianback.repository.RussianNounJpaRepository;
 import com.cavalierfou.russianback.repository.RussianSingularPluralNounCoupleJpaRepository;
-import com.cavalierfou.russianback.repository.RussianDeclCatTypeRefJpaRepository;
-import com.cavalierfou.russianback.repository.RussianDeclSpecEndingRefJpaRepository;
-import com.cavalierfou.russianback.repository.RussianDeclSpecRuleRefJpaRepository;
-import com.cavalierfou.russianback.repository.RussianDeclensionNameRefJpaRepository;
-import com.cavalierfou.russianback.repository.RussianGenderRefJpaRepository;
-import com.cavalierfou.russianback.repository.RussianGrammaticalNumberRefJpaRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,27 +22,13 @@ import org.springframework.stereotype.Service;
 public class RussianNounService {
 
     @Autowired
+    private ReferenceService referenceService;
+    @Autowired
     private RussianNounJpaRepository russianNounJpaRepository;
     @Autowired
     private RussianNounCategoryRefJpaRepository russianNounCategoryRefJpaRepository;
     @Autowired
-    private RussianDeclCatTypeRefJpaRepository russianDeclCatTypeRefJpaRepository;
-    @Autowired
-    private RussianDeclensionNameRefJpaRepository russianDeclensionNameRefJpaRepository;
-    @Autowired
-    private RussianGenderRefJpaRepository russianGenderRefJpaRepository;
-    @Autowired
-    private RussianGrammaticalNumberRefJpaRepository rGNumberRefJpaRepository;
-    @Autowired
-    private RussianNounEndingRefJpaRepository russianNounEndingRefJpaRepository;
-    @Autowired
-    private RussianCaseRefJpaRepository russianCaseRefJpaRepository;
-    @Autowired
     private RussianSingularPluralNounCoupleJpaRepository rSPNCoupleJpaRepository;
-    @Autowired
-    private RussianDeclSpecEndingRefJpaRepository rDSEndingRefJpaRepository;
-    @Autowired
-    private RussianDeclSpecRuleRefJpaRepository rDSRuleRefJpaRepository;
     @Autowired
     private MemoryRussianSpecificNounEndingJpaRepository memoryRSNEndingJpaRepository;
     @Autowired
@@ -71,35 +44,10 @@ public class RussianNounService {
         }
     }
 
-    public List<RussianNounCustom> find(String translation, boolean singularPlural) {
+    public List<RussianNounCustom> find(String translation) {
 
         List<RussianNoun> russianNouns = (translation != null) ? russianNounJpaRepository.findByTranslation(translation)
                 : russianNounJpaRepository.findAll();
-
-        if (translation != null && singularPlural && !russianNouns.isEmpty()) {
-            List<RussianNounCustom> russianNounCustoms = new ArrayList<>();
-
-            RussianNounCustom russianNoun1 = mapToCustom(russianNouns.get(0));
-            russianNounCustoms.add(russianNoun1);
-
-            boolean isSingular = Constant.S.getValue()
-                    .equals(russianNoun1.getRussianNounCategory().getRussianGrammaticalNumber());
-
-            var rns = isSingular ? rSPNCoupleJpaRepository.findByRussianSingularNounId(russianNoun1.getId())
-                    : rSPNCoupleJpaRepository.findByRussianPluralNounId(russianNoun1.getId());
-
-            if (!rns.isEmpty()) {
-                Long russianNoun2Id = isSingular ? rns.get(0).getRussianPluralNounId()
-                        : rns.get(0).getRussianSingularNounId();
-
-                russianNounJpaRepository.findById(russianNoun2Id).ifPresent(rn -> {
-                    RussianNounCustom russianNoun2 = mapToCustom(rn);
-                    russianNounCustoms.add(russianNoun2);
-                });
-            }
-
-            return russianNounCustoms;
-        }
 
         return russianNouns.stream().map(russianNoun -> mapToCustom(russianNoun)).collect(Collectors.toList());
     }
@@ -210,90 +158,20 @@ public class RussianNounService {
         russianNounCustom.setAnimate(russianNoun.getIsAnimate());
         russianNounCustom.setRoot(russianNoun.getRoot());
         russianNounCustom.setTranslation(russianNoun.getTranslation());
-        existingRussianNounCategoryRefOptional
-                .ifPresent(rncr -> russianNounCustom.setRussianNounCategory(mapRNCRC(rncr)));
+        existingRussianNounCategoryRefOptional.ifPresent(rncr -> russianNounCustom.setRussianNounCategory(
+                referenceService.mapRNCRC(rncr, russianNounCustom, russianNounCustom.getIsAnimate())));
 
-        List<RussianNounEndingRefCustom> russianNounEndingRefCustoms = new ArrayList<>();
-        String[] nominativeAccusativeGenitive = new String[3];
-
-        russianNounEndingRefJpaRepository.findByRussianNounCategoryRefId(russianNoun.getRussianNounCategoryRefId())
-                .forEach(russianNounEnding -> {
-
-                    RussianNounEndingRefCustom russianNounEndingRefCustom = new RussianNounEndingRefCustom();
-
-                    List<RussianDeclSpecEndingRefCustom> russianDeclSpecEndingRefs = rDSEndingRefJpaRepository
-                            .findByRussianNounEndingRefId(russianNounEnding.getId()).stream()
-                            .map(rdser -> mapRDSERC(rdser, russianNoun.getId())).collect(Collectors.toList());
-
-                    russianNounEndingRefCustom.setSpecificEndingRules(russianDeclSpecEndingRefs);
-                    russianCaseRefJpaRepository.findById(russianNounEnding.getRussianCaseRefId())
-                            .ifPresent(data -> russianNounEndingRefCustom.setRussianCase(data.getValue()));
-                    russianNounEndingRefCustom.setValue(russianNounEnding.getValue());
-                    russianNounEndingRefCustoms.add(russianNounEndingRefCustom);
-
-                    String[] endingValue = new String[1];
-                    russianNounEndingRefCustom.getSpecificEndingRules().stream()
-                            .filter(rule -> rule.isApplied() && rule.getValue() != null).findFirst()
-                            .ifPresentOrElse(r -> endingValue[0] = r.getValue(),
-                                    () -> endingValue[0] = russianNounEndingRefCustom.getValue());
-
-                    if (Constant.N.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
-                        russianNounCustom
-                                .setNominativeForm(russianNounCustom.getRoot() + russianNounEndingRefCustom.getValue());
-
-                        nominativeAccusativeGenitive[0] = endingValue[0];
-                    }
-                    if (Constant.A.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
-                        nominativeAccusativeGenitive[1] = endingValue[0];
-                    }
-                    if (Constant.G.getValue().equals(russianNounEndingRefCustom.getRussianCase())) {
-                        nominativeAccusativeGenitive[2] = endingValue[0];
-                    }
-                });
-
-        if (Constant.NG.getValue().equals(nominativeAccusativeGenitive[1])) {
-            russianNounEndingRefCustoms.stream()
-                    .filter(rNEndingRefCustom -> Constant.NG.getValue().equals(rNEndingRefCustom.getValue()))
-                    .findFirst()
-                    .ifPresent(rNEnding -> rNEnding.getSpecificEndingRules().get(0)
-                            .setValue(russianNounCustom.getIsAnimate() ? nominativeAccusativeGenitive[2]
-                                    : nominativeAccusativeGenitive[0]));
+        boolean isSingular = Constant.S.getValue()
+                .equals(russianNounCustom.getRussianNounCategory().getRussianGrammaticalNumber());
+        var rns = isSingular ? rSPNCoupleJpaRepository.findByRussianSingularNounId(russianNounCustom.getId())
+                : rSPNCoupleJpaRepository.findByRussianPluralNounId(russianNounCustom.getId());
+        if (!rns.isEmpty()) {
+            Long singularPluralCoupleNounId = isSingular ? rns.get(0).getRussianPluralNounId()
+                    : rns.get(0).getRussianSingularNounId();
+            russianNounCustom.setSingularPluralCoupleNounId(singularPluralCoupleNounId);
         }
-        russianNounCustom.setRussianNounEndings(russianNounEndingRefCustoms);
 
         return russianNounCustom;
-    }
-
-    public RussianNounCategoryRefCustom mapRNCRC(RussianNounCategoryRef rncr) {
-        RussianNounCategoryRefCustom russianNounCategoryRefCustom = new RussianNounCategoryRefCustom();
-        russianDeclCatTypeRefJpaRepository.findById(rncr.getRussianDeclCatTypeRefId())
-                .ifPresent(data -> russianNounCategoryRefCustom.setRussianDeclCatType(data.getValue()));
-        russianDeclensionNameRefJpaRepository.findById(rncr.getRussianDeclensionNameRefId())
-                .ifPresent(data -> russianNounCategoryRefCustom.setRussianDeclensionName(data.getValue()));
-        russianGenderRefJpaRepository.findById(rncr.getRussianGenderRefId())
-                .ifPresent(data -> russianNounCategoryRefCustom.setRussianGender(data.getValue()));
-        rGNumberRefJpaRepository.findById(rncr.getRussianGrammaticalNumberRefId())
-                .ifPresent(data -> russianNounCategoryRefCustom.setRussianGrammaticalNumber(data.getValue()));
-        return russianNounCategoryRefCustom;
-    }
-
-    public RussianDeclSpecEndingRefCustom mapRDSERC(RussianDeclSpecEndingRef rdser, Long nounId) {
-        RussianDeclSpecEndingRefCustom rdserCustom = new RussianDeclSpecEndingRefCustom();
-        rdserCustom.setId(rdser.getId());
-
-        if (!Constant.NG.getValue().equals(rdser.getValue())) {
-            rdserCustom.setValue(rdser.getValue());
-            rdserCustom.setApplied(!memoryRSNEndingJpaRepository
-                    .findByRussianNounIdAndRussianDeclSpecEndingRefId(nounId, rdser.getId()).isEmpty());
-        } else {
-            // I don't put any value for now
-            rdserCustom.setApplied(true);
-        }
-
-        rDSRuleRefJpaRepository.findById(rdser.getRussianDeclSpecRuleRefId())
-                .ifPresent(rule -> rdserCustom.setRule(rule.getValue()));
-
-        return rdserCustom;
     }
 
 }

@@ -28,10 +28,9 @@ class RussianNounController {
 
     @GetMapping
     public ResponseEntity<List<RussianNounCustom>> getRussianNouns(
-            @RequestParam(value = "translation", required = false) String translation,
-            @RequestParam(value = "singular_plural", required = false) boolean singularPlural) {
+            @RequestParam(value = "translation", required = false) String translation) {
         try {
-            List<RussianNounCustom> russianNounCustoms = russianNounService.find(translation, singularPlural);
+            List<RussianNounCustom> russianNounCustoms = russianNounService.find(translation);
             if (russianNounCustoms.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

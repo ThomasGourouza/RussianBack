@@ -12,11 +12,11 @@ public class RussianNounCustom {
 
 	private String nominativeForm;
 
-	private RussianNounCategoryRefCustom russianNounCategory;
-
 	private String translation;
 
-	private List<RussianNounEndingRefCustom> russianNounEndings;
+	private Long singularPluralCoupleNounId;
+
+	private RussianNounCategoryRefCustom russianNounCategory;
 
 	public RussianNounCustom() {
 		// default constructor
@@ -54,14 +54,6 @@ public class RussianNounCustom {
 		this.nominativeForm = nominativeForm;
 	}
 
-	public RussianNounCategoryRefCustom getRussianNounCategory() {
-		return this.russianNounCategory;
-	}
-
-	public void setRussianNounCategory(RussianNounCategoryRefCustom russianNounCategory) {
-		this.russianNounCategory = russianNounCategory;
-	}
-
 	public String getTranslation() {
 		return this.translation;
 	}
@@ -70,12 +62,20 @@ public class RussianNounCustom {
 		this.translation = translation;
 	}
 
-	public List<RussianNounEndingRefCustom> getRussianNounEndings() {
-		return russianNounEndings;
+	public RussianNounCategoryRefCustom getRussianNounCategory() {
+		return this.russianNounCategory;
 	}
 
-	public void setRussianNounEndings(List<RussianNounEndingRefCustom> russianNounEndings) {
-		this.russianNounEndings = russianNounEndings;
+	public void setRussianNounCategory(RussianNounCategoryRefCustom russianNounCategory) {
+		this.russianNounCategory = russianNounCategory;
+	}
+
+	public Long getSingularPluralCoupleNounId() {
+		return singularPluralCoupleNounId;
+	}
+
+	public void setSingularPluralCoupleNounId(Long singularPluralCoupleNounId) {
+		this.singularPluralCoupleNounId = singularPluralCoupleNounId;
 	}
 
 }
