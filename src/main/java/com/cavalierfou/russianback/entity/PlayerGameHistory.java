@@ -25,14 +25,11 @@ public class PlayerGameHistory implements Serializable {
 	@Column(name="\"player_game_id\"")
 	private long playerGameId;
 
-	@Column(name="\"russian_adjective_ending_ref_id\"")
-	private long russianAdjectiveEndingRefId;
-
 	@Column(name="\"russian_adjective_id\"")
 	private long russianAdjectiveId;
 
-	@Column(name="\"russian_noun_ending_ref_id\"")
-	private long russianNounEndingRefId;
+	@Column(name="\"russian_case_ref_id\"")
+	private long russianCaseRefId;
 
 	@Column(name="\"russian_noun_id\"")
 	private long russianNounId;
@@ -65,14 +62,6 @@ public class PlayerGameHistory implements Serializable {
 		this.playerGameId = playerGameId;
 	}
 
-	public long getRussianAdjectiveEndingRefId() {
-		return this.russianAdjectiveEndingRefId;
-	}
-
-	public void setRussianAdjectiveEndingRefId(long russianAdjectiveEndingRefId) {
-		this.russianAdjectiveEndingRefId = russianAdjectiveEndingRefId;
-	}
-
 	public long getRussianAdjectiveId() {
 		return this.russianAdjectiveId;
 	}
@@ -81,12 +70,12 @@ public class PlayerGameHistory implements Serializable {
 		this.russianAdjectiveId = russianAdjectiveId;
 	}
 
-	public long getRussianNounEndingRefId() {
-		return this.russianNounEndingRefId;
+	public long getRussianCaseRefId() {
+		return this.russianCaseRefId;
 	}
 
-	public void setRussianNounEndingRefId(long russianNounEndingRefId) {
-		this.russianNounEndingRefId = russianNounEndingRefId;
+	public void setRussianCaseRefId(long russianCaseRefId) {
+		this.russianCaseRefId = russianCaseRefId;
 	}
 
 	public long getRussianNounId() {

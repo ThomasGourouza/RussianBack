@@ -34,7 +34,6 @@ public class PlayerGame implements Serializable {
 	@Column(name="\"score\"")
 	private long score;
 
-	// bi-directional many-to-one association to PlayerSpokenLanguage
 	@OneToMany(mappedBy="playerGameId")
 	private List<PlayerGameHistory> playerGameHistories;
 

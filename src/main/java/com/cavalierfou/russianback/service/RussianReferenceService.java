@@ -6,9 +6,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import com.cavalierfou.russianback.constant.Constant;
 import com.cavalierfou.russianback.customentity.RussianDeclSpecEndingRefCustom;
+import com.cavalierfou.russianback.customentity.RussianInterrogativeWordRefCustom;
 import com.cavalierfou.russianback.customentity.RussianNounCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianNounCustom;
 import com.cavalierfou.russianback.customentity.RussianNounEndingRefCustom;
+import com.cavalierfou.russianback.entity.RussianCaseRef;
 import com.cavalierfou.russianback.entity.RussianDeclCatTypeRef;
 import com.cavalierfou.russianback.entity.RussianDeclSpecEndingRef;
 import com.cavalierfou.russianback.entity.RussianDeclensionNameRef;
@@ -16,6 +18,7 @@ import com.cavalierfou.russianback.entity.RussianGenderRef;
 import com.cavalierfou.russianback.entity.RussianGrammaticalNumberRef;
 import com.cavalierfou.russianback.entity.RussianInterrogativeWordRef;
 import com.cavalierfou.russianback.entity.RussianNounCategoryRef;
+import com.cavalierfou.russianback.entity.RussianRoleRef;
 import com.cavalierfou.russianback.repository.MemoryRussianSpecificNounEndingJpaRepository;
 import com.cavalierfou.russianback.repository.RussianCaseRefJpaRepository;
 import com.cavalierfou.russianback.repository.RussianDeclCatTypeRefJpaRepository;
@@ -27,6 +30,8 @@ import com.cavalierfou.russianback.repository.RussianGrammaticalNumberRefJpaRepo
 import com.cavalierfou.russianback.repository.RussianInterrogativeWordJpaRepository;
 import com.cavalierfou.russianback.repository.RussianNounCategoryRefJpaRepository;
 import com.cavalierfou.russianback.repository.RussianNounEndingRefJpaRepository;
+import com.cavalierfou.russianback.repository.RussianRoleRefJpaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +66,8 @@ public class RussianReferenceService {
     private MemoryRussianSpecificNounEndingJpaRepository memoryRSNEndingJpaRepository;
     @Autowired
     private RussianInterrogativeWordJpaRepository rInterrogativeWordJpaRepository;
+    @Autowired
+    private RussianRoleRefJpaRepository russianRoleRefJpaRepository;
 
     public List<RussianDeclCatTypeRef> findDeclCatType() {
         return rDCTypeRefJpaRepository.findAll();
@@ -98,8 +105,30 @@ public class RussianReferenceService {
         }
     }
 
-    public List<RussianInterrogativeWordRef> findInterrogativeWord() {
-        return rInterrogativeWordJpaRepository.findAll();
+    public List<RussianRoleRef> findRole() {
+        return russianRoleRefJpaRepository.findAll();
+    }
+
+    public List<RussianCaseRef> findCase() {
+        return russianCaseRefJpaRepository.findAll();
+    }
+
+    public List<RussianInterrogativeWordRefCustom> findInterrogativeWord() {
+        List<RussianInterrogativeWordRefCustom> rIWordRefCustoms = new ArrayList<>();
+        rInterrogativeWordJpaRepository.findAll().forEach(rIWordRef -> rIWordRefCustoms.add(mapRIWC(rIWordRef)));
+
+        return rIWordRefCustoms;
+    }
+
+    private RussianInterrogativeWordRefCustom mapRIWC(RussianInterrogativeWordRef rIWordRef) {
+        RussianInterrogativeWordRefCustom rIWordRefCustom = new RussianInterrogativeWordRefCustom();
+        russianCaseRefJpaRepository.findById(rIWordRef.getRussianCaseRefId())
+                .ifPresent(rCase -> rIWordRefCustom.setRussianCase(rCase.getValue()));
+        russianRoleRefJpaRepository.findById(rIWordRef.getRussianRoleRefId())
+                .ifPresent(rRole -> rIWordRefCustom.setRussianRole(rRole.getValue()));
+        rIWordRefCustom.setValue(rIWordRef.getValue());
+
+        return rIWordRefCustom;
     }
 
     public RussianNounCategoryRefCustom mapRNCRC(RussianNounCategoryRef rncr, RussianNounCustom russianNounCustom,

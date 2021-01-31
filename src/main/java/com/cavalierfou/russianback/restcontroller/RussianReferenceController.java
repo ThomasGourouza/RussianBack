@@ -1,12 +1,16 @@
 package com.cavalierfou.russianback.restcontroller;
 
 import java.util.List;
+
+import com.cavalierfou.russianback.customentity.RussianInterrogativeWordRefCustom;
 import com.cavalierfou.russianback.customentity.RussianNounCategoryRefCustom;
+import com.cavalierfou.russianback.entity.RussianCaseRef;
 import com.cavalierfou.russianback.entity.RussianDeclCatTypeRef;
 import com.cavalierfou.russianback.entity.RussianDeclensionNameRef;
 import com.cavalierfou.russianback.entity.RussianGenderRef;
 import com.cavalierfou.russianback.entity.RussianGrammaticalNumberRef;
 import com.cavalierfou.russianback.entity.RussianInterrogativeWordRef;
+import com.cavalierfou.russianback.entity.RussianRoleRef;
 import com.cavalierfou.russianback.service.RussianReferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -89,8 +93,26 @@ class RussianReferenceController {
         }
     }
 
+    @GetMapping("/russian_role")
+    public ResponseEntity<List<RussianRoleRef>> getRole() {
+        try {
+            return new ResponseEntity<>(russianReferenceService.findRole(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/russian_case")
+    public ResponseEntity<List<RussianCaseRef>> getCase() {
+        try {
+            return new ResponseEntity<>(russianReferenceService.findCase(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/interrogative_word")
-    public ResponseEntity<List<RussianInterrogativeWordRef>> getInterrogativeWord() {
+    public ResponseEntity<List<RussianInterrogativeWordRefCustom>> getInterrogativeWord() {
         try {
             return new ResponseEntity<>(russianReferenceService.findInterrogativeWord(), HttpStatus.OK);
         } catch (Exception e) {
