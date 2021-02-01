@@ -1,18 +1,14 @@
 package com.cavalierfou.russianback.customentity;
 
-import java.util.List;
-
 public class RussianAdjectiveCustom {
 
     private long id;
 
     private String root;
-
-    private RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom;
-
+    
     private String translation;
-
-    private List<RussianAdjectiveEndingRefCustom> russianAdjectiveEndingRefCustoms;
+    
+    private RussianAdjectiveCategoryRefCustom category;
 
     public RussianAdjectiveCustom() {
         // default constructor
@@ -34,13 +30,12 @@ public class RussianAdjectiveCustom {
         this.root = root;
     }
 
-    public RussianAdjectiveCategoryRefCustom getRussianAdjectiveCategoryRefCustom() {
-        return this.russianAdjectiveCategoryRefCustom;
+    public RussianAdjectiveCategoryRefCustom getCategory() {
+        return this.category;
     }
 
-    public void setRussianAdjectiveCategoryRefCustom(
-            RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom) {
-        this.russianAdjectiveCategoryRefCustom = russianAdjectiveCategoryRefCustom;
+    public void setCategory(RussianAdjectiveCategoryRefCustom category) {
+        this.category = category;
     }
 
     public String getTranslation() {
@@ -49,14 +44,6 @@ public class RussianAdjectiveCustom {
 
     public void setTranslation(String translation) {
         this.translation = translation;
-    }
-
-    public List<RussianAdjectiveEndingRefCustom> getRussianAdjectiveEndingRefCustoms() {
-        return this.russianAdjectiveEndingRefCustoms;
-    }
-
-    public void setRussianAdjectiveEndingRefCustoms(List<RussianAdjectiveEndingRefCustom> russianAdjectiveEndingRefCustoms) {
-        this.russianAdjectiveEndingRefCustoms = russianAdjectiveEndingRefCustoms;
     }
 
 }

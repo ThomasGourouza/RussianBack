@@ -2,6 +2,7 @@ package com.cavalierfou.russianback.restcontroller;
 
 import java.util.List;
 
+import com.cavalierfou.russianback.customentity.RussianAdjectiveCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianInterrogativeWordRefCustom;
 import com.cavalierfou.russianback.customentity.RussianNounCategoryRefCustom;
 import com.cavalierfou.russianback.entity.RussianCaseRef;
@@ -68,12 +69,9 @@ class RussianReferenceController {
     public ResponseEntity<List<RussianNounCategoryRefCustom>> getNounCategory(
             @RequestParam(value = "is_noun_animate", required = false) Boolean isNounAnimate) {
         try {
-            List<RussianNounCategoryRefCustom> russianNounCategoryRefCustoms = russianReferenceService
-                    .findNounCategory(isNounAnimate != null ? isNounAnimate : false);
-            if (russianNounCategoryRefCustoms.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(russianNounCategoryRefCustoms, HttpStatus.OK);
+            return new ResponseEntity<>(
+                    russianReferenceService.findNounCategory(isNounAnimate != null ? isNounAnimate : false),
+                    HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -117,6 +115,26 @@ class RussianReferenceController {
             return new ResponseEntity<>(russianReferenceService.findInterrogativeWord(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/adjective_category")
+    public ResponseEntity<List<RussianAdjectiveCategoryRefCustom>> getAdjectiveCategory() {
+        try {
+            return new ResponseEntity<>(russianReferenceService.findAdjectiveCategory(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/adjective_category/{id}")
+    public ResponseEntity<RussianAdjectiveCategoryRefCustom> getAdjectiveCategoryById(@PathVariable("id") Long id) {
+        RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom = russianReferenceService
+                .findAdjectiveCategoryById(id);
+        if (russianAdjectiveCategoryRefCustom != null) {
+            return new ResponseEntity<>(russianAdjectiveCategoryRefCustom, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

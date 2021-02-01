@@ -3,7 +3,6 @@ package com.cavalierfou.russianback.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import com.cavalierfou.russianback.constant.Constant;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveCustom;
@@ -23,6 +22,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RussianAdjectiveService {
 
+    @Autowired
+    private RussianReferenceService russianReferenceService;
     @Autowired
     private RussianAdjectiveJpaRepository russianAdjectiveJpaRepository;
     @Autowired
@@ -91,46 +92,15 @@ public class RussianAdjectiveService {
     }
 
     public RussianAdjectiveCustom mapToCustom(RussianAdjective russianAdjective) {
-        Optional<RussianAdjectiveCategoryRef> existingRussianAdjectiveCategoryRefOptional = russianAdjectiveCategoryRefJpaRepository
-                .findById(russianAdjective.getRussianAdjectiveCategoryRefId());
-        List<RussianAdjectiveEndingRef> existingRussianAdjectiveEndingRefs = russianAdjectiveEndingRefJpaRepository
-                .findByRussianAdjectiveCategoryRefId(russianAdjective.getRussianAdjectiveCategoryRefId());
-
         RussianAdjectiveCustom russianAdjectiveCustom = new RussianAdjectiveCustom();
         russianAdjectiveCustom.setId(russianAdjective.getId());
         russianAdjectiveCustom.setRoot(russianAdjective.getRoot());
         russianAdjectiveCustom.setTranslation(russianAdjective.getTranslation());
 
-        if (existingRussianAdjectiveEndingRefs != null) {
-            List<RussianAdjectiveEndingRefCustom> russianAdjectiveEndingRefCustoms = new ArrayList<>();
+        russianAdjectiveCategoryRefJpaRepository.findById(russianAdjective.getRussianAdjectiveCategoryRefId())
+                .ifPresent(russianAdjectiveCategoryRef -> russianAdjectiveCustom
+                        .setCategory(russianReferenceService.mapRACRC(russianAdjectiveCategoryRef)));
 
-            existingRussianAdjectiveEndingRefs.forEach(existingRussianAdjectiveEndingRef -> {
-                RussianAdjectiveEndingRefCustom russianAdjectiveEndingRefCustom = new RussianAdjectiveEndingRefCustom();
-
-                russianCaseRefJpaRepository.findById(existingRussianAdjectiveEndingRef.getRussianCaseRefId()).ifPresent(
-                        russianCase -> russianAdjectiveEndingRefCustom.setRussianCase(russianCase.getValue()));
-
-                russianGenderRefJpaRepository.findById(existingRussianAdjectiveEndingRef.getRussianGenderRefId())
-                        .ifPresent(russianGender -> russianAdjectiveEndingRefCustom
-                                .setRussianGender(russianGender.getValue()));
-
-                russianAdjectiveEndingRefCustom.setValue(existingRussianAdjectiveEndingRef.getValue());
-
-                russianAdjectiveEndingRefCustoms.add(russianAdjectiveEndingRefCustom);
-                if (Constant.M.getValue().equals(russianAdjectiveEndingRefCustom.getRussianGender())
-                        && Constant.N.getValue().equals(russianAdjectiveEndingRefCustom.getRussianCase())
-                        && existingRussianAdjectiveCategoryRefOptional.isPresent()) {
-                    var russianAdjectiveCategoryRef = existingRussianAdjectiveCategoryRefOptional.get();
-                    RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom = new RussianAdjectiveCategoryRefCustom();
-                    russianAdjectiveCategoryRefCustom
-                            .setMasculineNominativeEnding(russianAdjectiveEndingRefCustom.getValue());
-                    russianAdjectiveCategoryRefCustom.setValue(russianAdjectiveCategoryRef.getValue());
-                    russianAdjectiveCustom.setRussianAdjectiveCategoryRefCustom(russianAdjectiveCategoryRefCustom);
-                }
-            });
-
-            russianAdjectiveCustom.setRussianAdjectiveEndingRefCustoms(russianAdjectiveEndingRefCustoms);
-        }
         return russianAdjectiveCustom;
     }
 
