@@ -19,6 +19,9 @@ public class PlayerGameHistory implements Serializable {
 	@Column(name="\"id\"")
 	private long id;
 
+	@Column(name="\"item_number\"")
+	private Long itemNumber;
+
 	@Column(name="\"iscorrect\"")
 	private boolean iscorrect;
 
@@ -44,6 +47,14 @@ public class PlayerGameHistory implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getItemNumber() {
+		return this.itemNumber;
+	}
+
+	public void setItemNumber(long itemNumber) {
+		this.itemNumber = itemNumber;
 	}
 
 	public boolean getIscorrect() {

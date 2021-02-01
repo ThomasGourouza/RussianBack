@@ -2,58 +2,58 @@ package com.cavalierfou.russianback.customentity;
 
 public class PlayerGameHistoryCustom {
 
-    private long id;
+	private Long itemNumber;
 
 	private boolean iscorrect;
 
-	private RussianAdjectiveEndingRefCustom russianAdjectiveEndingRefCustom;
+	private long russianAdjectiveId;
 
-    private String russianAdjectiveRoot;
+	private long russianNounId;
     
-    private String russianAdjectiveTranslation;
+	private String russianCase;
 
 	public PlayerGameHistoryCustom() {
 		// default constructor
-    }
+	}
 
-    public long getId() {
-        return id;
-    }
+	public long getItemNumber() {
+		return this.itemNumber;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setItemNumber(long itemNumber) {
+		this.itemNumber = itemNumber;
+	}
 
-    public boolean isIscorrect() {
-        return iscorrect;
-    }
+	public boolean getIscorrect() {
+		return this.iscorrect;
+	}
 
-    public void setIscorrect(boolean iscorrect) {
-        this.iscorrect = iscorrect;
-    }
+	public void setIscorrect(boolean iscorrect) {
+		this.iscorrect = iscorrect;
+	}
 
-    public RussianAdjectiveEndingRefCustom getRussianAdjectiveEndingRefCustom() {
-        return russianAdjectiveEndingRefCustom;
-    }
+	public long getRussianAdjectiveId() {
+		return this.russianAdjectiveId;
+	}
 
-    public void setRussianAdjectiveEndingRefCustom(RussianAdjectiveEndingRefCustom russianAdjectiveEndingRefCustom) {
-        this.russianAdjectiveEndingRefCustom = russianAdjectiveEndingRefCustom;
-    }
+	public void setRussianAdjectiveId(long russianAdjectiveId) {
+		this.russianAdjectiveId = russianAdjectiveId;
+	}
 
-    public String getRussianAdjectiveRoot() {
-        return russianAdjectiveRoot;
-    }
-
-    public void setRussianAdjectiveRoot(String russianAdjectiveRoot) {
-        this.russianAdjectiveRoot = russianAdjectiveRoot;
-    }
-
-    public String getRussianAdjectiveTranslation() {
-        return russianAdjectiveTranslation;
-    }
-
-    public void setRussianAdjectiveTranslation(String russianAdjectiveTranslation) {
-        this.russianAdjectiveTranslation = russianAdjectiveTranslation;
-    }
+	public long getRussianNounId() {
+        return this.russianNounId;
+	}
     
+	public void setRussianNounId(long russianNounId) {
+        this.russianNounId = russianNounId;
+	}
+    
+    public String getRussianCase() {
+        return this.russianCase;
+    }
+
+    public void setRussianCase(String russianCase) {
+        this.russianCase = russianCase;
+    }
+
 }

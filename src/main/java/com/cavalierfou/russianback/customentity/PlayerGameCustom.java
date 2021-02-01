@@ -4,28 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 public class PlayerGameCustom {
-    
-    private long id;
-
-	private Date dateTime;
 
 	private long game;
+    
+	private Date dateTime;
 
     private long score;
     
-    private List<PlayerGameHistoryCustom> playerGameHistoryCustoms;
+    private List<PlayerGameHistoryCustom> history;
 
 	public PlayerGameCustom() {
 		// default constructor
 	}
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public Date getDateTime() {
         return dateTime;
@@ -51,11 +41,11 @@ public class PlayerGameCustom {
         this.score = score;
     }
 
-    public List<PlayerGameHistoryCustom> getPlayerGameHistoryCustoms() {
-        return playerGameHistoryCustoms;
+    public List<PlayerGameHistoryCustom> getHistory() {
+        return history;
     }
 
-    public void setPlayerGameHistoryCustoms(List<PlayerGameHistoryCustom> playerGameHistoryCustoms) {
-        this.playerGameHistoryCustoms = playerGameHistoryCustoms;
+    public void setHistory(List<PlayerGameHistoryCustom> history) {
+        this.history = history;
     }
 }
