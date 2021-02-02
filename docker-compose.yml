@@ -6,11 +6,11 @@ services:
 
   # PostgreSQL DataBase for the application
   russian-db:
-    image: thomasgourouza/rusiandb_with_data:latest
+    image: thomasgourouza/russian-db:data
     container_name: russian-db
     # Volume mounted for database for the storage
     volumes:
-      - russian-data:/var/lib/postgresql/data
+      - data-russian:/var/lib/postgresql/data
     ports: 
       - 5000:5432 # Forward the exposed port 5432 on the container to port 5000 on the host machine
     # Environment variable for DB name, user and password
@@ -18,7 +18,7 @@ services:
       - POSTGRES_DB=cavalierfou
       - POSTGRES_USER=cavalierfou
       - POSTGRES_PASSWORD=db780345
-      - PGDATA=postgres
+      - PGDATA=data-russian
 
   # Back-end Spring Boot Application
   russian-back:
@@ -38,5 +38,5 @@ services:
 
 #Volumes for DB data
 volumes:
-  russian-data:
+  data-russian:
     driver: local

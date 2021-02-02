@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "a138ea75-9e52-4b3f-a9d4-fbba8c75eaee",
+		"name": "CRUD_player/spokenLanguage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "spokenLanguage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player/spokenLanguage",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player",
+						"spokenLanguage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spokenLanguage by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player/spokenLanguage/53",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player",
+						"spokenLanguage",
+						"53"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spokenLanguage with ids parameters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player/spokenLanguage?ids=51,52,53",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player",
+						"spokenLanguage"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "51,52,53"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spokenLanguage with playerId parameter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player/spokenLanguage?playerId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player",
+						"spokenLanguage"
+					],
+					"query": [
+						{
+							"key": "playerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spokenLanguage with languageIds parameter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player/spokenLanguage?languageIds=11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player",
+						"spokenLanguage"
+					],
+					"query": [
+						{
+							"key": "languageIds",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spokenLanguage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"certification\": \"TRUC2\",\r\n        \"languageRefId\": 3,\r\n        \"levelRefId\": 4,\r\n        \"playerId\": 1\r\n    },\r\n    {\r\n        \"certification\": \"TRUC3\",\r\n        \"languageRefId\": 9,\r\n        \"levelRefId\": 4,\r\n        \"playerId\": 1\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/player/spokenLanguage",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player",
+						"spokenLanguage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spokenLanguage",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"certification\": \"DELE\",\r\n    \"languageRefId\": 1,\r\n    \"levelRefId\": 5,\r\n    \"playerId\": 205\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/player/spokenLanguage/51",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player",
+						"spokenLanguage",
+						"51"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spokenLanguage",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player/spokenLanguage/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player",
+						"spokenLanguage",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

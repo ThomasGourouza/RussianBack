@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "d7f54a80-f110-40c7-9a21-9b7777573ef2",
+		"name": "R_player_references",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "country",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player_reference/country",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player_reference",
+						"country"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "gender",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player_reference/gender",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player_reference",
+						"gender"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player_reference/image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player_reference",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "language",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player_reference/language",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player_reference",
+						"language"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "level",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/player_reference/level",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"player_reference",
+						"level"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
