@@ -8,6 +8,8 @@ public class RussianAdjectiveCustom {
     
     private String translation;
     
+    private String nominativeMasculineForm;
+
     private RussianAdjectiveCategoryRefCustom category;
 
     public RussianAdjectiveCustom() {
@@ -44,6 +46,14 @@ public class RussianAdjectiveCustom {
 
     public void setTranslation(String translation) {
         this.translation = translation;
+    }
+
+    public String getNominativeMasculineForm() {
+        return nominativeMasculineForm;
+    }
+
+    public void setNominativeMasculineForm(String nominativeMasculineForm) {
+        this.nominativeMasculineForm = nominativeMasculineForm;
     }
 
 }

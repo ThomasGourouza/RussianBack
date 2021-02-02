@@ -6,16 +6,10 @@ import java.util.Optional;
 import com.cavalierfou.russianback.constant.Constant;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveCustom;
-import com.cavalierfou.russianback.customentity.RussianAdjectiveEndingRefCustom;
 import com.cavalierfou.russianback.entity.RussianAdjective;
-import com.cavalierfou.russianback.entity.RussianAdjectiveCategoryRef;
-import com.cavalierfou.russianback.entity.RussianAdjectiveEndingRef;
 import com.cavalierfou.russianback.repository.JdbcRepository;
 import com.cavalierfou.russianback.repository.RussianAdjectiveCategoryRefJpaRepository;
-import com.cavalierfou.russianback.repository.RussianAdjectiveEndingRefJpaRepository;
 import com.cavalierfou.russianback.repository.RussianAdjectiveJpaRepository;
-import com.cavalierfou.russianback.repository.RussianCaseRefJpaRepository;
-import com.cavalierfou.russianback.repository.RussianGenderRefJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +22,6 @@ public class RussianAdjectiveService {
     private RussianAdjectiveJpaRepository russianAdjectiveJpaRepository;
     @Autowired
     private RussianAdjectiveCategoryRefJpaRepository russianAdjectiveCategoryRefJpaRepository;
-    @Autowired
-    private RussianAdjectiveEndingRefJpaRepository russianAdjectiveEndingRefJpaRepository;
-    @Autowired
-    private RussianCaseRefJpaRepository russianCaseRefJpaRepository;
-    @Autowired
-    private RussianGenderRefJpaRepository russianGenderRefJpaRepository;
     @Autowired
     private JdbcRepository jdbcRepository;
 
@@ -98,10 +86,21 @@ public class RussianAdjectiveService {
         russianAdjectiveCustom.setTranslation(russianAdjective.getTranslation());
 
         russianAdjectiveCategoryRefJpaRepository.findById(russianAdjective.getRussianAdjectiveCategoryRefId())
-                .ifPresent(russianAdjectiveCategoryRef -> russianAdjectiveCustom
-                        .setCategory(russianReferenceService.mapRACRC(russianAdjectiveCategoryRef)));
+                .ifPresent(russianAdjectiveCategoryRef -> {
+                    russianAdjectiveCustom.setCategory(russianReferenceService.mapRACRC(russianAdjectiveCategoryRef));
+                    setNominativeMasculineForm(russianAdjectiveCustom, russianAdjectiveCustom.getCategory());
+                });
 
         return russianAdjectiveCustom;
+    }
+
+    private void setNominativeMasculineForm(RussianAdjectiveCustom russianAdjectiveCustom,
+            RussianAdjectiveCategoryRefCustom category) {
+        category.getEndings().stream()
+                .filter(rAEndingRefCustom -> Constant.M.getValue().equals(rAEndingRefCustom.getRussianGender())
+                        && Constant.N.getValue().equals(rAEndingRefCustom.getRussianCase()))
+                .findFirst().ifPresent(ending -> russianAdjectiveCustom
+                        .setNominativeMasculineForm(russianAdjectiveCustom.getRoot() + ending.getValue()));
     }
 
 }

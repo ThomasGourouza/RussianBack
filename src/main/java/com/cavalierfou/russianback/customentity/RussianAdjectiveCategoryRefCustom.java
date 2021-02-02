@@ -6,8 +6,6 @@ public class RussianAdjectiveCategoryRefCustom {
 
 	private Long id;
 
-	private String masculineNominativeEnding;
-
 	private String value;
 
 	private List<RussianAdjectiveEndingRefCustom> endings;
@@ -22,14 +20,6 @@ public class RussianAdjectiveCategoryRefCustom {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getMasculineNominativeEnding() {
-		return this.masculineNominativeEnding;
-	}
-
-	public void setMasculineNominativeEnding(String masculineNominativeEnding) {
-		this.masculineNominativeEnding = masculineNominativeEnding;
 	}
 
 	public String getValue() {

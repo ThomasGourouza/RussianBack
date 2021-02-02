@@ -248,13 +248,8 @@ public class RussianReferenceService {
     public RussianAdjectiveCategoryRefCustom mapRACRC(RussianAdjectiveCategoryRef russianAdjectiveCategoryRef) {
         RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom = new RussianAdjectiveCategoryRefCustom();
         russianAdjectiveCategoryRefCustom.setId(russianAdjectiveCategoryRef.getId());
-        russianAdjectiveCategoryRefCustom.setEndings(mapRAERC(russianAdjectiveCategoryRef.getId()));
-        russianAdjectiveCategoryRefCustom.getEndings().stream()
-                .filter(rAEndingRefCustom -> Constant.M.getValue().equals(rAEndingRefCustom.getRussianGender())
-                        && Constant.N.getValue().equals(rAEndingRefCustom.getRussianCase()))
-                .findFirst()
-                .ifPresent(ending -> russianAdjectiveCategoryRefCustom.setMasculineNominativeEnding(ending.getValue()));
         russianAdjectiveCategoryRefCustom.setValue(russianAdjectiveCategoryRef.getValue());
+        russianAdjectiveCategoryRefCustom.setEndings(mapRAERC(russianAdjectiveCategoryRef.getId()));
 
         return russianAdjectiveCategoryRefCustom;
     }
