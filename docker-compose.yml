@@ -13,18 +13,16 @@ services:
       - data-russian:/var/lib/postgresql/data
     ports: 
       - 5000:5432 # Forward the exposed port 5432 on the container to port 5000 on the host machine
-    # Environment variable for DB name, user and password
+    # Environment variable
     environment: 
-      - POSTGRES_DB=cavalierfou
-      - POSTGRES_USER=cavalierfou
-      - POSTGRES_PASSWORD=db780345
       - PGDATA=data-russian
 
   # Back-end Spring Boot Application
   russian-back:
-    # The docker file in scrum-app build the jar and provides the docker image with the following name.
+    # Either use image or build
+    image: thomasgourouza/russian-backend:springboot
+    # build: ./
     container_name: russian-back
-    build: ./
     # Environment variables for Spring Boot Application.
     environment: 
       - DB_SERVER=russian-db

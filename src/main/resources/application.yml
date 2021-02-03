@@ -2,10 +2,14 @@ server:
     port: 8080
 spring:
     datasource:
-        name: cavalierfou
-        url: jdbc:postgresql://localhost:5000/cavalierfou
-        username: cavalierfou
-        password: db780345
+        name: ${POSTGRES_DB}
+        url: jdbc:postgresql://${DB_SERVER}/${POSTGRES_DB}
+        username: ${POSTGRES_USER}
+        password: ${POSTGRES_PASSWORD}
+        # name: cavalierfou
+        # url: jdbc:postgresql://localhost:5000/cavalierfou
+        # username: cavalierfou
+        # password: db780345
     jpa:
         properties:
             hibernate:
@@ -13,19 +17,4 @@ spring:
         hibernate:
             ddl-auto: update
         show-sql: false
-# server:
-#     port: 8080
-# spring:
-#     datasource:
-#         name: ${POSTGRES_DB}
-#         url: jdbc:postgresql://${DB_SERVER}/${POSTGRES_DB}
-#         username: ${POSTGRES_USER}
-#         password: ${POSTGRES_PASSWORD}
-#     jpa:
-#         properties:
-#             hibernate:
-#                 dialect: org.hibernate.dialect.PostgreSQLDialect
-#         hibernate:
-#             ddl-auto: update
-#         show-sql: false
         
