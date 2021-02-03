@@ -21,7 +21,7 @@ services:
   russian-back:
     # Either use image or build
     image: thomasgourouza/russian-backend:springboot
-    # build: ./
+    # build: ../
     container_name: russian-back
     # Environment variables for Spring Boot Application.
     environment: 

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/player_reference")
-class PlayerReferenceController {
+@RequestMapping("/api/v1/reference/player")
+class ReferencePlayerController {
 
     @Autowired
     private PlayerReferenceService playerReferenceService;
@@ -31,7 +31,7 @@ class PlayerReferenceController {
     }
 
     @GetMapping("/gender")
-    public ResponseEntity<List<GenderRef>> getGender() {
+    public ResponseEntity<List<GenderRef>> getPlayerGender() {
         try {
             return new ResponseEntity<>(playerReferenceService.findGender(), HttpStatus.OK);
         } catch (Exception e) {
@@ -57,7 +57,7 @@ class PlayerReferenceController {
         }
     }
 
-    @GetMapping("/level")
+    @GetMapping("/language/level")
     public ResponseEntity<List<LevelRef>> getLevel() {
         try {
             return new ResponseEntity<>(playerReferenceService.findLevel(), HttpStatus.OK);

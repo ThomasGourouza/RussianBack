@@ -135,9 +135,9 @@ class RussianNounController {
         }
     }
 
-    @DeleteMapping("/specific_rule/{noun_id}")
-    public ResponseEntity<HttpStatus> deleteRule(@PathVariable("noun_id") Long nounId,
-    @RequestParam(value = "spec_id", required = false) Long russianDeclSpecEndingRefId) {
+    @DeleteMapping("/specific_rule")
+    public ResponseEntity<HttpStatus> deleteRule(@RequestParam(value = "noun_id", required = true) Long nounId,
+            @RequestParam(value = "spec_id", required = false) Long russianDeclSpecEndingRefId) {
         if (russianNounService.isRulePresent(nounId)) {
             try {
                 russianNounService.removeRule(nounId, russianDeclSpecEndingRefId);

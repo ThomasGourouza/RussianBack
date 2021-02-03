@@ -1,0 +1,1563 @@
+{
+	"info": {
+		"_postman_id": "f2be1f25-cddb-42cf-9feb-d0995cbaabf1",
+		"name": "Russian_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "player",
+			"item": [
+				{
+					"name": "player/game",
+					"item": [
+						{
+							"name": "game",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/game",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "game by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/game/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"game",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "game with parameters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/game?player_id=1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"game"
+									],
+									"query": [
+										{
+											"key": "player_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "game",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dateTime\": \"2021-01-31\",\r\n    \"game\": 2,\r\n    \"playerId\": 1,\r\n    \"score\": 1,\r\n    \"playerGameHistories\": [\r\n        {\r\n            \"iscorrect\": true,\r\n            \"russianAdjectiveId\": 1,\r\n            \"russianCaseRefId\": 3,\r\n            \"russianNounId\": 1\r\n        },\r\n        {\r\n            \"iscorrect\": false,\r\n            \"russianAdjectiveId\": 2,\r\n            \"russianCaseRefId\": 5,\r\n            \"russianNounId\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/player/game",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "game",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dateTime\": \"2021-01-31\",\r\n    \"game\": 2,\r\n    \"playerId\": 1,\r\n    \"score\": 1,\r\n    \"playerGameHistories\": [\r\n        {\r\n            \"iscorrect\": true,\r\n            \"russianAdjectiveId\": 1,\r\n            \"russianCaseRefId\": 3,\r\n            \"russianNounId\": 1\r\n        },\r\n        {\r\n            \"iscorrect\": false,\r\n            \"russianAdjectiveId\": 2,\r\n            \"russianCaseRefId\": 5,\r\n            \"russianNounId\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/player/game/4",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"game",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "player/spokenLanguage",
+					"item": [
+						{
+							"name": "spokenLanguage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/spokenLanguage",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"spokenLanguage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "spokenLanguage by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/spokenLanguage/53",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"spokenLanguage",
+										"53"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "spokenLanguage with ids parameters",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/spokenLanguage?ids=51,52,53",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"spokenLanguage"
+									],
+									"query": [
+										{
+											"key": "ids",
+											"value": "51,52,53"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "spokenLanguage with playerId parameter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/spokenLanguage?playerId=1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"spokenLanguage"
+									],
+									"query": [
+										{
+											"key": "playerId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "spokenLanguage with languageIds parameter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/spokenLanguage?languageIds=11",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"spokenLanguage"
+									],
+									"query": [
+										{
+											"key": "languageIds",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "spokenLanguage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"certification\": \"TRUC2\",\r\n        \"languageRefId\": 3,\r\n        \"levelRefId\": 4,\r\n        \"playerId\": 1\r\n    },\r\n    {\r\n        \"certification\": \"TRUC3\",\r\n        \"languageRefId\": 9,\r\n        \"levelRefId\": 4,\r\n        \"playerId\": 1\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/player/spokenLanguage",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"spokenLanguage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "spokenLanguage",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"certification\": \"DELE\",\r\n    \"languageRefId\": 1,\r\n    \"levelRefId\": 5,\r\n    \"playerId\": 205\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/player/spokenLanguage/51",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"spokenLanguage",
+										"51"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "spokenLanguage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/spokenLanguage/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"spokenLanguage",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "player",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/player",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "player by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/player/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"player",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "player with login parameter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/player?login=js",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"player"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "js"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "player with languageIds parameter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/player?languageIds=1,4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"player"
+							],
+							"query": [
+								{
+									"key": "languageIds",
+									"value": "1,4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "player",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"birthCountryRefId\": 3,\r\n    \"birthDate\": \"1983-08-15\",\r\n    \"email\": \"testrrr@moonfruit.com\",\r\n    \"firstName\": \"Coco\",\r\n    \"genderRefId\": 1,\r\n    \"imageRefId\": 2,\r\n    \"lastName\": \"Vrtyh\",\r\n    \"login\": \"hjgkjg\",\r\n    \"password\": \"gjjjjvg\",\r\n    \"phone\": \"0671933440\",\r\n    \"playerSpokenLanguages\": [\r\n        {\r\n            \"certification\": \"DELE\",\r\n            \"languageRefId\": 1,\r\n            \"levelRefId\": 5\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/player/205",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"player",
+								"205"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "player",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/player/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"player",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"birthCountryRefId\": 3,\r\n    \"birthDate\": \"1983-08-15\",\r\n    \"email\": \"testrrr@moonfruit.com\",\r\n    \"firstName\": \"Coco\",\r\n    \"genderRefId\": 1,\r\n    \"imageRefId\": 2,\r\n    \"lastName\": \"Bandicoot\",\r\n    \"login\": \"cocoB\",\r\n    \"password\": \"psswd\",\r\n    \"phone\": \"0671933440\",\r\n    \"playerSpokenLanguages\": [\r\n        {\r\n            \"certification\": \"TEST1\",\r\n            \"languageRefId\": 1,\r\n            \"levelRefId\": 5\r\n        },\r\n        {\r\n            \"certification\": \"TEST2\",\r\n            \"languageRefId\": 5,\r\n            \"levelRefId\": 4\r\n        },\r\n        {\r\n            \"certification\": \"TEST3\",\r\n            \"languageRefId\": 8,\r\n            \"levelRefId\": 4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/player",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"player"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "adjective",
+			"item": [
+				{
+					"name": "adjective",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/adjective",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"adjective"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adjective by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/adjective/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"adjective",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adjective with parameters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/adjective?translation=blue",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"adjective"
+							],
+							"query": [
+								{
+									"key": "translation",
+									"value": "blue"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adjective",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"root\": \"хорош\",\r\n    \"russianAdjectiveCategoryRefId\": 3,\r\n    \"translation\": \"good\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/adjective",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"adjective"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adjective",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"root\": \"хорош\",\r\n    \"russianAdjectiveCategoryRefId\": 3,\r\n    \"translation\": \"good\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/adjective/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"adjective",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adjective",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/adjective/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"adjective",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "noun",
+			"item": [
+				{
+					"name": "noun/singular_plural_couple",
+					"item": [
+						{
+							"name": "singular_plural_couple",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"russianSingularNounId\": 9,\r\n    \"russianPluralNounId\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/noun/singular_plural",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"noun",
+										"singular_plural"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "singular_plural_couple",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/noun/singular_plural/9",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"noun",
+										"singular_plural",
+										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "noun/specific_rule",
+					"item": [
+						{
+							"name": "specific_rule",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"russianNounId\": 1,\r\n    \"russianDeclSpecEndingRefId\": 11\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/v1/noun/specific_rule",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"noun",
+										"specific_rule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "specific_rule with noun_id parameters",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/noun/specific_rule?noun_id=1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"noun",
+										"specific_rule"
+									],
+									"query": [
+										{
+											"key": "noun_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "specific_rule with noun_id and spec_id parameters",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/noun/specific_rule?noun_id=1&spec_id=11",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"noun",
+										"specific_rule"
+									],
+									"query": [
+										{
+											"key": "noun_id",
+											"value": "1"
+										},
+										{
+											"key": "spec_id",
+											"value": "11"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "noun",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/noun",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"noun"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "noun by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/noun/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"noun",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "noun with parameters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/noun?translation=book",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"noun"
+							],
+							"query": [
+								{
+									"key": "translation",
+									"value": "book"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "noun",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/noun/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"noun",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "noun",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isAnimate\": true,\r\n    \"root\": \"lam\",\r\n    \"russianNounCategoryRefId\": 10,\r\n    \"translation\": \"lamas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/noun/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"noun",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "noun",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isAnimate\": true,\r\n    \"root\": \"lam\",\r\n    \"russianNounCategoryRefId\": 10,\r\n    \"translation\": \"lamas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/noun",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"noun"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reference",
+			"item": [
+				{
+					"name": "reference/player",
+					"item": [
+						{
+							"name": "reference/player/country",
+							"item": [
+								{
+									"name": "country",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/reference/player/country",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"reference",
+												"player",
+												"country"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reference/player/gender",
+							"item": [
+								{
+									"name": "gender",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/reference/player/gender",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"reference",
+												"player",
+												"gender"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reference/player/image",
+							"item": [
+								{
+									"name": "image",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/reference/player/image",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"reference",
+												"player",
+												"image"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reference/player/language",
+							"item": [
+								{
+									"name": "reference/player/language/level",
+									"item": [
+										{
+											"name": "level",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/player/language/level",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"player",
+														"language",
+														"level"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "language",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/reference/player/language",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"reference",
+												"player",
+												"language"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "reference/russian",
+					"item": [
+						{
+							"name": "reference/russian/declension",
+							"item": [
+								{
+									"name": "reference/russian/declension/name",
+									"item": [
+										{
+											"name": "name",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/declension/name",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"declension",
+														"name"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "reference/russian/declension/type",
+									"item": [
+										{
+											"name": "type",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/declension/type",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"declension",
+														"type"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "reference/russian/interrogative_word",
+							"item": [
+								{
+									"name": "interrogative_word",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/reference/russian/interrogative_word",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"reference",
+												"russian",
+												"interrogative_word"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reference/russian/grammatical_number",
+							"item": [
+								{
+									"name": "grammatical_number",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/reference/russian/gender",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"reference",
+												"russian",
+												"gender"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reference/russian/gender",
+							"item": [
+								{
+									"name": "gender",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/russian_reference/russian_gender",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"russian_reference",
+												"russian_gender"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reference/russian/case",
+							"item": [
+								{
+									"name": "case",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/reference/russian/case",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"reference",
+												"russian",
+												"case"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reference/russian/role",
+							"item": [
+								{
+									"name": "role",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/api/v1/reference/russian/role",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"v1",
+												"reference",
+												"russian",
+												"role"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "reference/russian/category",
+							"item": [
+								{
+									"name": "reference/russian/category/noun_category",
+									"item": [
+										{
+											"name": "noun_category",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/category/noun_category",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"category",
+														"noun_category"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "noun_category with parameters",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/category/noun_category?is_noun_animate=false",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"category",
+														"noun_category"
+													],
+													"query": [
+														{
+															"key": "is_noun_animate",
+															"value": "false"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "noun_category by id",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/category/noun_category/10",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"category",
+														"noun_category",
+														"10"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "noun_category by id with parameters",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/category/noun_category/10?is_noun_animate=true",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"category",
+														"noun_category",
+														"10"
+													],
+													"query": [
+														{
+															"key": "is_noun_animate",
+															"value": "true"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "reference/russian/category/adjective_category",
+									"item": [
+										{
+											"name": "adjective_category",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/category/adjective_category",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"category",
+														"adjective_category"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "adjective_category by id",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/category/adjective_category/4",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"category",
+														"adjective_category",
+														"4"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

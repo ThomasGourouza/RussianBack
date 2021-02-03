@@ -1,7 +1,12 @@
 package com.cavalierfou.russianback.restcontroller;
 
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveCategoryRefCustom;
 import com.cavalierfou.russianback.customentity.RussianInterrogativeWordRefCustom;
 import com.cavalierfou.russianback.customentity.RussianNounCategoryRefCustom;
@@ -10,26 +15,19 @@ import com.cavalierfou.russianback.entity.RussianDeclCatTypeRef;
 import com.cavalierfou.russianback.entity.RussianDeclensionNameRef;
 import com.cavalierfou.russianback.entity.RussianGenderRef;
 import com.cavalierfou.russianback.entity.RussianGrammaticalNumberRef;
-import com.cavalierfou.russianback.entity.RussianInterrogativeWordRef;
 import com.cavalierfou.russianback.entity.RussianRoleRef;
 import com.cavalierfou.russianback.service.RussianReferenceService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/russian_reference")
-class RussianReferenceController {
+@RequestMapping("/api/v1/reference/russian")
+class ReferenceRussianController {
 
     @Autowired
     private RussianReferenceService russianReferenceService;
 
-    @GetMapping("/declension_category_type")
+    @GetMapping("/declension/type")
     public ResponseEntity<List<RussianDeclCatTypeRef>> getDeclCatType() {
         try {
             return new ResponseEntity<>(russianReferenceService.findDeclCatType(), HttpStatus.OK);
@@ -38,7 +36,7 @@ class RussianReferenceController {
         }
     }
 
-    @GetMapping("/declension_name")
+    @GetMapping("/declension/name")
     public ResponseEntity<List<RussianDeclensionNameRef>> getDeclensionName() {
         try {
             return new ResponseEntity<>(russianReferenceService.findDeclensionName(), HttpStatus.OK);
@@ -56,7 +54,7 @@ class RussianReferenceController {
         }
     }
 
-    @GetMapping("/russian_gender")
+    @GetMapping("/gender")
     public ResponseEntity<List<RussianGenderRef>> getGender() {
         try {
             return new ResponseEntity<>(russianReferenceService.findGender(), HttpStatus.OK);
@@ -65,7 +63,7 @@ class RussianReferenceController {
         }
     }
 
-    @GetMapping("/noun_category")
+    @GetMapping("/category/noun_category")
     public ResponseEntity<List<RussianNounCategoryRefCustom>> getNounCategory(
             @RequestParam(value = "is_noun_animate", required = false) Boolean isNounAnimate) {
         try {
@@ -77,7 +75,7 @@ class RussianReferenceController {
         }
     }
 
-    @GetMapping("/noun_category/{id}")
+    @GetMapping("/category/noun_category/{id}")
     public ResponseEntity<RussianNounCategoryRefCustom> getNounCategoryById(@PathVariable("id") Long id,
             @RequestParam(value = "is_noun_animate", required = false) Boolean isNounAnimate) {
 
@@ -91,7 +89,7 @@ class RussianReferenceController {
         }
     }
 
-    @GetMapping("/russian_role")
+    @GetMapping("/role")
     public ResponseEntity<List<RussianRoleRef>> getRole() {
         try {
             return new ResponseEntity<>(russianReferenceService.findRole(), HttpStatus.OK);
@@ -100,7 +98,7 @@ class RussianReferenceController {
         }
     }
 
-    @GetMapping("/russian_case")
+    @GetMapping("/case")
     public ResponseEntity<List<RussianCaseRef>> getCase() {
         try {
             return new ResponseEntity<>(russianReferenceService.findCase(), HttpStatus.OK);
@@ -118,7 +116,7 @@ class RussianReferenceController {
         }
     }
 
-    @GetMapping("/adjective_category")
+    @GetMapping("/category/adjective_category")
     public ResponseEntity<List<RussianAdjectiveCategoryRefCustom>> getAdjectiveCategory() {
         try {
             return new ResponseEntity<>(russianReferenceService.findAdjectiveCategory(), HttpStatus.OK);
@@ -127,7 +125,7 @@ class RussianReferenceController {
         }
     }
 
-    @GetMapping("/adjective_category/{id}")
+    @GetMapping("/category/adjective_category/{id}")
     public ResponseEntity<RussianAdjectiveCategoryRefCustom> getAdjectiveCategoryById(@PathVariable("id") Long id) {
         RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom = russianReferenceService
                 .findAdjectiveCategoryById(id);
