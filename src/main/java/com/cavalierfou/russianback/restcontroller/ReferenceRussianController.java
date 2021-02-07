@@ -19,6 +19,7 @@ import com.cavalierfou.russianback.entity.RussianRoleRef;
 import com.cavalierfou.russianback.service.RussianReferenceService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/v1/reference/russian")
@@ -27,6 +28,7 @@ class ReferenceRussianController {
     @Autowired
     private RussianReferenceService russianReferenceService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/declension/type")
     public ResponseEntity<List<RussianDeclCatTypeRef>> getDeclCatType() {
         try {
@@ -36,6 +38,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/declension/name")
     public ResponseEntity<List<RussianDeclensionNameRef>> getDeclensionName() {
         try {
@@ -45,6 +48,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/grammatical_number")
     public ResponseEntity<List<RussianGrammaticalNumberRef>> getGrammaticalNumber() {
         try {
@@ -54,6 +58,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/gender")
     public ResponseEntity<List<RussianGenderRef>> getGender() {
         try {
@@ -63,6 +68,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/category/noun_category")
     public ResponseEntity<List<RussianNounCategoryRefCustom>> getNounCategory(
             @RequestParam(value = "is_noun_animate", required = false) Boolean isNounAnimate) {
@@ -75,6 +81,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/category/noun_category/{id}")
     public ResponseEntity<RussianNounCategoryRefCustom> getNounCategoryById(@PathVariable("id") Long id,
             @RequestParam(value = "is_noun_animate", required = false) Boolean isNounAnimate) {
@@ -89,6 +96,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/role")
     public ResponseEntity<List<RussianRoleRef>> getRole() {
         try {
@@ -98,6 +106,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/case")
     public ResponseEntity<List<RussianCaseRef>> getCase() {
         try {
@@ -107,6 +116,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/interrogative_word")
     public ResponseEntity<List<RussianInterrogativeWordRefCustom>> getInterrogativeWord() {
         try {
@@ -116,6 +126,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/category/adjective_category")
     public ResponseEntity<List<RussianAdjectiveCategoryRefCustom>> getAdjectiveCategory() {
         try {
@@ -125,6 +136,7 @@ class ReferenceRussianController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/category/adjective_category/{id}")
     public ResponseEntity<RussianAdjectiveCategoryRefCustom> getAdjectiveCategoryById(@PathVariable("id") Long id) {
         RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom = russianReferenceService

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/v1/player/game")
@@ -24,6 +25,7 @@ class PlayerGameController {
     @Autowired
     private PlayerGameService playerGameService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<List<PlayerGameCustom>> getPlayerGames(
             @RequestParam(value = "player_id", required = false) Long playerId) {
@@ -38,6 +40,7 @@ class PlayerGameController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{id}")
     public ResponseEntity<PlayerGameCustom> getById(@PathVariable("id") Long id) {
         PlayerGameCustom existingPlayerGame = playerGameService.findById(id);
@@ -48,6 +51,7 @@ class PlayerGameController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     public ResponseEntity<PlayerGameCustom> create(@RequestBody PlayerGame playerGameToSave) {
         try {
@@ -57,6 +61,7 @@ class PlayerGameController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         if (playerGameService.isPresent(id)) {

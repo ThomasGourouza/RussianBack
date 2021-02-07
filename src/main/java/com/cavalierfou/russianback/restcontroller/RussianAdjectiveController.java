@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/v1/adjective")
@@ -24,6 +25,7 @@ class RussianAdjectiveController {
     @Autowired
     private RussianAdjectiveService russianAdjectiveService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<List<RussianAdjectiveCustom>> getRussianAdjectives(
             @RequestParam(value = "translation", required = false) String translation) {
@@ -38,6 +40,7 @@ class RussianAdjectiveController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{id}")
     public ResponseEntity<RussianAdjectiveCustom> getById(@PathVariable("id") Long id) {
         RussianAdjectiveCustom existingRussianAdjectiveCustom = russianAdjectiveService.findById(id);
@@ -48,6 +51,7 @@ class RussianAdjectiveController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     public ResponseEntity<RussianAdjectiveCustom> create(@RequestBody RussianAdjective russianAdjectiveToSave) {
         try {
@@ -57,6 +61,7 @@ class RussianAdjectiveController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("{id}")
     public ResponseEntity<RussianAdjectiveCustom> update(@PathVariable("id") Long id,
             @RequestBody RussianAdjective updatedRussianAdjective) {
@@ -72,6 +77,7 @@ class RussianAdjectiveController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id,
             @RequestParam(value = "force", required = false) boolean force) {

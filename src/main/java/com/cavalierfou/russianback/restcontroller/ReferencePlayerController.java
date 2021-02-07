@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/v1/reference/player")
@@ -21,6 +22,7 @@ class ReferencePlayerController {
     @Autowired
     private PlayerReferenceService playerReferenceService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/country")
     public ResponseEntity<List<BirthCountryRef>> getCountry() {
         try {
@@ -30,6 +32,7 @@ class ReferencePlayerController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/gender")
     public ResponseEntity<List<GenderRef>> getPlayerGender() {
         try {
@@ -39,6 +42,7 @@ class ReferencePlayerController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/image")
     public ResponseEntity<List<ImageRef>> getImage() {
         try {
@@ -48,6 +52,7 @@ class ReferencePlayerController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/language")
     public ResponseEntity<List<LanguageRef>> getLanguage() {
         try {
@@ -57,6 +62,7 @@ class ReferencePlayerController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/language/level")
     public ResponseEntity<List<LevelRef>> getLevel() {
         try {

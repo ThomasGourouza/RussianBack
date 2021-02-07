@@ -23,8 +23,6 @@ public class PlayerCustom {
 
 	private String login;
 
-	private String password;
-
 	private String phone;
 
 	private List<PlayerSpokenLanguageCustom> playerSpokenLanguages;
@@ -45,7 +43,6 @@ public class PlayerCustom {
         this.imageUrl = imageUrl;
         this.lastName = lastName;
         this.login = login;
-        this.password = password;
         this.phone = phone;
         this.playerSpokenLanguages = playerSpokenLanguages;
     }
@@ -120,14 +117,6 @@ public class PlayerCustom {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {

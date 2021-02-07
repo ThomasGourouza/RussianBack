@@ -46,11 +46,14 @@ public class PlayerService {
         }
     }
 
-    public List<PlayerCustom> find(String login, String languageIds) {
-
+    public List<PlayerCustom> find(String login, String password, String languageIds) {
         List<Player> players;
-        if (login != null) {
-            players = playerJpaRepository.findByLoginContaining(login);
+        if (login != null || password != null) {
+            if (login != null && password != null) {
+                players = playerJpaRepository.findByLoginAndPassword(login, password);
+            } else {
+                return new ArrayList<>();
+            }
         } else if (languageIds != null) {
             List<PlayerSpokenLanguageCustom> playerSpokenLanguages = playerSpokenLanguageService.find(null, null,
                     languageIds);
@@ -129,7 +132,6 @@ public class PlayerService {
         playerCustom.setFirstName(player.getFirstName());
         playerCustom.setLastName(player.getLastName());
         playerCustom.setLogin(player.getLogin());
-        playerCustom.setPassword(player.getPassword());
         playerCustom.setPhone(player.getPhone());
         birthCountryRefOptional.ifPresent(birthCountryRef -> playerCustom.setBirthCountry(birthCountryRef.getValue()));
         genderRefOptional.ifPresent(genderRef -> playerCustom.setGender(genderRef.getValue()));
