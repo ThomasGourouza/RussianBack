@@ -398,12 +398,12 @@
 					"response": []
 				},
 				{
-					"name": "player with login parameter",
+					"name": "player with login and password parameter",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/player?login=js",
+							"raw": "localhost:8080/api/v1/player?login=Cavalier_Fou&password=mdp",
 							"host": [
 								"localhost"
 							],
@@ -416,7 +416,16 @@
 							"query": [
 								{
 									"key": "login",
-									"value": "js"
+									"value": "Cavalier_Fou"
+								},
+								{
+									"key": "password",
+									"value": "mdpkl",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "mdp"
 								}
 							]
 						}
