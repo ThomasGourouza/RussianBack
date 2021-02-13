@@ -356,7 +356,7 @@ insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id,
 insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id, russian_gender_ref_id, russian_case_ref_id, value) values (65, 3, 3, 5, 'ом');
 insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id, russian_gender_ref_id, russian_case_ref_id, value) values (66, 3, 3, 6, 'им');
 insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id, russian_gender_ref_id, russian_case_ref_id, value) values (67, 3, 4, 1, 'ие');
-insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id, russian_gender_ref_id, russian_case_ref_id, value) values (68, 1, 1, 2, 'N/G');
+insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id, russian_gender_ref_id, russian_case_ref_id, value) values (68, 3, 4, 2, 'N/G');
 insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id, russian_gender_ref_id, russian_case_ref_id, value) values (69, 3, 4, 3, 'им');
 insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id, russian_gender_ref_id, russian_case_ref_id, value) values (70, 3, 4, 4, 'их');
 insert into russian_adjective_ending_ref (id, russian_adjective_category_ref_id, russian_gender_ref_id, russian_case_ref_id, value) values (71, 3, 4, 5, 'их');
