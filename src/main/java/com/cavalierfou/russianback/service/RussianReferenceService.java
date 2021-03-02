@@ -212,10 +212,23 @@ public class RussianReferenceService {
         });
 
         if (Constant.NG.getValue().equals(nominativeAccusativeGenitive[1])) {
-            String nomOrGen = isAnimate ? nominativeAccusativeGenitive[2] : nominativeAccusativeGenitive[0];
             russianNounEndingRefCustoms.stream()
                     .filter(rNEndingRefCustom -> Constant.NG.getValue().equals(rNEndingRefCustom.getValue()))
-                    .findFirst().ifPresent(rNEnding -> rNEnding.getSpecificEndingRules().get(0).setValue(nomOrGen));
+                    .findFirst().ifPresent(rNEnding -> {
+                        RussianDeclSpecEndingRefCustom specificEndingRule = new RussianDeclSpecEndingRefCustom();
+                        specificEndingRule.setId(rNEnding.getSpecificEndingRules().get(0).getId());
+                        specificEndingRule.setRule(rNEnding.getSpecificEndingRules().get(0).getRule());
+                        specificEndingRule.setValue(rNEnding.getSpecificEndingRules().get(0).getValue());
+                        specificEndingRule.setApplied(rNEnding.getSpecificEndingRules().get(0).isApplied());
+                        rNEnding.getSpecificEndingRules().add(specificEndingRule);
+
+                        rNEnding.getSpecificEndingRules().get(0).setValue(nominativeAccusativeGenitive[0]);
+                        rNEnding.getSpecificEndingRules().get(0).setApplied(!isAnimate);
+                        rNEnding.getSpecificEndingRules().get(0).setRule("Nominative form if inanimate");
+                        rNEnding.getSpecificEndingRules().get(1).setValue(nominativeAccusativeGenitive[2]);
+                        rNEnding.getSpecificEndingRules().get(1).setApplied(isAnimate);
+                        rNEnding.getSpecificEndingRules().get(1).setRule("Genitive form if animate");
+                    });
         }
         russianNounCategoryRefCustom.setRussianNounEndings(russianNounEndingRefCustoms);
 
@@ -235,7 +248,7 @@ public class RussianReferenceService {
                 rdserCustom.setApplied(false);
             }
         } else {
-            // I don't put any value for now
+            // no value for now
             rdserCustom.setApplied(true);
         }
 
