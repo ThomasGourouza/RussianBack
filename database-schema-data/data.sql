@@ -6,8 +6,8 @@ insert into russian_decl_spec_rule_ref (id, value) values (2, 'After a sibilant 
 insert into russian_decl_spec_rule_ref (id, value) values (3, 'After a sibilant (ж, ч, ш, щ).');
 insert into russian_decl_spec_rule_ref (id, value) values (4, 'After a soft consonant and when stressed.');
 insert into russian_decl_spec_rule_ref (id, value) values (5, 'After a consonant.');
-insert into russian_decl_spec_rule_ref (id, value) values (6, 'Nominative form if inanimate.');
-insert into russian_decl_spec_rule_ref (id, value) values (7, 'Genitive form if animate.');
+insert into russian_decl_spec_rule_ref (id, value) values (6, 'Inanimate.');
+insert into russian_decl_spec_rule_ref (id, value) values (7, 'Animate.');
 insert into russian_decl_spec_rule_ref (id, value) values (8, 'For the nouns ending in ие/иё in the nominative singular and when unstressed.');
 insert into russian_decl_spec_rule_ref (id, value) values (9, 'For the nouns мать and дочь.');
 insert into russian_decl_spec_rule_ref (id, value) values (10, 'For the noun подмасте́рье.');
