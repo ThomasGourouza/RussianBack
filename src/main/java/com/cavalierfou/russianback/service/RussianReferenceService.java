@@ -17,6 +17,7 @@ import com.cavalierfou.russianback.entity.RussianAdjectiveCategoryRef;
 import com.cavalierfou.russianback.entity.RussianCaseRef;
 import com.cavalierfou.russianback.entity.RussianDeclCatTypeRef;
 import com.cavalierfou.russianback.entity.RussianDeclSpecEndingRef;
+import com.cavalierfou.russianback.entity.RussianDeclSpecRuleRef;
 import com.cavalierfou.russianback.entity.RussianDeclensionNameRef;
 import com.cavalierfou.russianback.entity.RussianGenderRef;
 import com.cavalierfou.russianback.entity.RussianGrammaticalNumberRef;
@@ -86,6 +87,10 @@ public class RussianReferenceService {
     public List<RussianDeclensionNameRef> findDeclensionName() {
         return rDNameRefJpaRepository.findAll();
     }
+
+    public List<RussianDeclSpecRuleRef> findRule() {
+		return rDSRuleRefJpaRepository.findAll();
+	}
 
     public List<RussianGrammaticalNumberRef> findGrammaticalNumber() {
         return rGNumberRefJpaRepository.findAll();
@@ -217,9 +222,9 @@ public class RussianReferenceService {
                     .filter(rNEndingRefCustom -> Constant.NG.getValue().equals(rNEndingRefCustom.getValue())
                             && rNEndingRefCustom.getSpecificEndingRules().size() > 1)
                     .findFirst().ifPresent(rNEnding -> {
-                        Pattern nominative = Pattern.compile(Constant.N.getValue(), Pattern.CASE_INSENSITIVE);
+                        Pattern inanimate = Pattern.compile(Constant.INANIMATE.getValue(), Pattern.CASE_INSENSITIVE);
                         rNEnding.getSpecificEndingRules().forEach(rule -> {
-                            if (nominative.matcher(rule.getRule()).find()) {
+                            if (inanimate.matcher(rule.getRule()).find()) {
                                 rule.setValue(nominativeAccusativeGenitive[0]);
                                 rule.setApplied(!isAnimate);
                             } else {

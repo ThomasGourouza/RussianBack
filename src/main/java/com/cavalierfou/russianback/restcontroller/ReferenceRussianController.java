@@ -12,6 +12,7 @@ import com.cavalierfou.russianback.customentity.RussianInterrogativeWordRefCusto
 import com.cavalierfou.russianback.customentity.RussianNounCategoryRefCustom;
 import com.cavalierfou.russianback.entity.RussianCaseRef;
 import com.cavalierfou.russianback.entity.RussianDeclCatTypeRef;
+import com.cavalierfou.russianback.entity.RussianDeclSpecRuleRef;
 import com.cavalierfou.russianback.entity.RussianDeclensionNameRef;
 import com.cavalierfou.russianback.entity.RussianGenderRef;
 import com.cavalierfou.russianback.entity.RussianGrammaticalNumberRef;
@@ -43,6 +44,16 @@ class ReferenceRussianController {
     public ResponseEntity<List<RussianDeclensionNameRef>> getDeclensionName() {
         try {
             return new ResponseEntity<>(russianReferenceService.findDeclensionName(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/declension/rule")
+    public ResponseEntity<List<RussianDeclSpecRuleRef>> getRule() {
+        try {
+            return new ResponseEntity<>(russianReferenceService.findRule(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
