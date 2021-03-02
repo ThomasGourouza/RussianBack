@@ -3,6 +3,7 @@ package com.cavalierfou.russianback.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import com.cavalierfou.russianback.constant.Constant;
 import com.cavalierfou.russianback.customentity.RussianAdjectiveCategoryRefCustom;
@@ -213,21 +214,19 @@ public class RussianReferenceService {
 
         if (Constant.NG.getValue().equals(nominativeAccusativeGenitive[1])) {
             russianNounEndingRefCustoms.stream()
-                    .filter(rNEndingRefCustom -> Constant.NG.getValue().equals(rNEndingRefCustom.getValue()))
+                    .filter(rNEndingRefCustom -> Constant.NG.getValue().equals(rNEndingRefCustom.getValue())
+                            && rNEndingRefCustom.getSpecificEndingRules().size() > 1)
                     .findFirst().ifPresent(rNEnding -> {
-                        RussianDeclSpecEndingRefCustom specificEndingRule = new RussianDeclSpecEndingRefCustom();
-                        specificEndingRule.setId(rNEnding.getSpecificEndingRules().get(0).getId());
-                        specificEndingRule.setRule(rNEnding.getSpecificEndingRules().get(0).getRule());
-                        specificEndingRule.setValue(rNEnding.getSpecificEndingRules().get(0).getValue());
-                        specificEndingRule.setApplied(rNEnding.getSpecificEndingRules().get(0).isApplied());
-                        rNEnding.getSpecificEndingRules().add(specificEndingRule);
-
-                        rNEnding.getSpecificEndingRules().get(0).setValue(nominativeAccusativeGenitive[0]);
-                        rNEnding.getSpecificEndingRules().get(0).setApplied(!isAnimate);
-                        rNEnding.getSpecificEndingRules().get(0).setRule("Nominative form if inanimate");
-                        rNEnding.getSpecificEndingRules().get(1).setValue(nominativeAccusativeGenitive[2]);
-                        rNEnding.getSpecificEndingRules().get(1).setApplied(isAnimate);
-                        rNEnding.getSpecificEndingRules().get(1).setRule("Genitive form if animate");
+                        Pattern nominative = Pattern.compile(Constant.N.getValue(), Pattern.CASE_INSENSITIVE);
+                        rNEnding.getSpecificEndingRules().forEach(rule -> {
+                            if (nominative.matcher(rule.getRule()).find()) {
+                                rule.setValue(nominativeAccusativeGenitive[0]);
+                                rule.setApplied(!isAnimate);
+                            } else {
+                                rule.setValue(nominativeAccusativeGenitive[2]);
+                                rule.setApplied(isAnimate);
+                            }
+                        });
                     });
         }
         russianNounCategoryRefCustom.setRussianNounEndings(russianNounEndingRefCustoms);
@@ -248,8 +247,8 @@ public class RussianReferenceService {
                 rdserCustom.setApplied(false);
             }
         } else {
-            // no value for now
-            rdserCustom.setApplied(true);
+            // the correct value is set later
+            rdserCustom.setApplied(false);
         }
 
         rDSRuleRefJpaRepository.findById(rdser.getRussianDeclSpecRuleRefId())
