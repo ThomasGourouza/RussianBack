@@ -12,6 +12,7 @@ insert into russian_decl_spec_rule_ref (id, value) values (8, 'For the nouns end
 insert into russian_decl_spec_rule_ref (id, value) values (9, 'For the nouns мать and дочь.');
 insert into russian_decl_spec_rule_ref (id, value) values (10, 'For the noun подмасте́рье.');
 insert into russian_decl_spec_rule_ref (id, value) values (11, 'Exception without any specific rule.');
+insert into russian_decl_spec_rule_ref (id, value) values (12, 'Exception without any specific rule, after a soft consonant and when stressed.');
 insert into russian_declension_name_ref (id, value) values (1, 'First declension');
 insert into russian_declension_name_ref (id, value) values (2, 'Second declension');
 insert into russian_declension_name_ref (id, value) values (3, 'Third declension');
@@ -625,6 +626,8 @@ insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (27, 74, 7, 'N/G');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (28, 79, 11, 'й');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (29, 79, 10, 'е');
+insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (75, 97, 10, 'я');
+insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (76, 99, 10, 'ев');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (30, 80, 6, 'N/G');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (31, 80, 7, 'N/G');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (32, 83, 4, 'ём');
@@ -639,7 +642,7 @@ insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (41, 98, 7, 'N/G');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (42, 99, 11, 'ев');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (43, 99, 4, 'ёй');
-insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (44, 99, 4, 'ёв');
+insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (44, 99, 12, 'ёв');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (45, 104, 6, 'N/G');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (46, 104, 7, 'N/G');
 insert into russian_decl_spec_ending_ref(id, russian_noun_ending_ref_id, russian_decl_spec_rule_ref_id, value) values (47, 109, 2, 'е');
