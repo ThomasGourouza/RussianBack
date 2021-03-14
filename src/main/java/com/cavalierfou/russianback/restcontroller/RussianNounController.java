@@ -114,8 +114,9 @@ class RussianNounController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @DeleteMapping("/singular_plural/{noun_id}")
-    public ResponseEntity<HttpStatus> dissociate(@PathVariable("noun_id") Long nounId) {
+    @DeleteMapping("/singular_plural")
+    public ResponseEntity<HttpStatus> dissociateByNounId(
+            @RequestParam(value = "noun_id", required = true) Long nounId) {
         if (russianNounService.isCouplePresent(nounId)) {
             try {
                 russianNounService.dissociateSingularPlural(nounId);
