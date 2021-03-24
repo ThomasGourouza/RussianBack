@@ -10,5 +10,6 @@ public interface PlayerJpaRepository extends JpaRepository<Player, Long> {
 
     public List<Player> findByIdIn(List<Long> ids);
 	public List<Player> findByLoginAndPassword(String login, String password);
+	public List<Player> findByLogin(String login);
 
 }

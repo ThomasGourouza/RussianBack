@@ -25,7 +25,7 @@ class PlayerSpokenLanguageController {
     @Autowired
     private PlayerSpokenLanguageService playerSpokenLanguageService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping
     public ResponseEntity<List<PlayerSpokenLanguageCustom>> getPlayerSpokenLanguage(
             @RequestParam(value = "ids", required = false) String ids,
@@ -43,7 +43,7 @@ class PlayerSpokenLanguageController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping("{id}")
     public ResponseEntity<PlayerSpokenLanguageCustom> getById(@PathVariable("id") Long id) {
         PlayerSpokenLanguageCustom existingPlayerSpokenLanguageCustom = playerSpokenLanguageService.findById(id);
@@ -54,7 +54,7 @@ class PlayerSpokenLanguageController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @PostMapping
     public ResponseEntity<List<PlayerSpokenLanguageCustom>> create(
             @RequestBody List<PlayerSpokenLanguage> playerSpokenLanguagesToSave) {
@@ -66,7 +66,7 @@ class PlayerSpokenLanguageController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @PutMapping("{id}")
     public ResponseEntity<PlayerSpokenLanguageCustom> update(@PathVariable("id") Long id,
             @RequestBody PlayerSpokenLanguage updatedPlayerSpokenLanguage) {
@@ -83,7 +83,7 @@ class PlayerSpokenLanguageController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         if (playerSpokenLanguageService.isPresent(id)) {

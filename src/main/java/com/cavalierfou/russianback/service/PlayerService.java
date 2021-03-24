@@ -46,6 +46,10 @@ public class PlayerService {
         }
     }
 
+    public Boolean existByLogin(String login) {
+        return !playerJpaRepository.findByLogin(login).isEmpty();
+    }
+
     public List<PlayerCustom> find(String login, String password, String languageIds) {
         List<Player> players;
         if (login != null || password != null) {

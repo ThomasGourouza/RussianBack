@@ -25,7 +25,7 @@ class PlayerGameController {
     @Autowired
     private PlayerGameService playerGameService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping
     public ResponseEntity<List<PlayerGameCustom>> getPlayerGames(
             @RequestParam(value = "player_id", required = false) Long playerId) {
@@ -40,7 +40,7 @@ class PlayerGameController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping("{id}")
     public ResponseEntity<PlayerGameCustom> getById(@PathVariable("id") Long id) {
         PlayerGameCustom existingPlayerGame = playerGameService.findById(id);
@@ -51,7 +51,7 @@ class PlayerGameController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @PostMapping
     public ResponseEntity<PlayerGameCustom> create(@RequestBody PlayerGame playerGameToSave) {
         try {
@@ -61,7 +61,7 @@ class PlayerGameController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         if (playerGameService.isPresent(id)) {

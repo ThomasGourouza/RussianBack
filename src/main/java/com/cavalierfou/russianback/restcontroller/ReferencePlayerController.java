@@ -22,7 +22,7 @@ class ReferencePlayerController {
     @Autowired
     private PlayerReferenceService playerReferenceService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping("/country")
     public ResponseEntity<List<BirthCountryRef>> getCountry() {
         try {
@@ -32,7 +32,7 @@ class ReferencePlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping("/gender")
     public ResponseEntity<List<GenderRef>> getPlayerGender() {
         try {
@@ -42,7 +42,7 @@ class ReferencePlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping("/image")
     public ResponseEntity<List<ImageRef>> getImage() {
         try {
@@ -52,7 +52,7 @@ class ReferencePlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping("/language")
     public ResponseEntity<List<LanguageRef>> getLanguage() {
         try {
@@ -62,7 +62,7 @@ class ReferencePlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:53184")
     @GetMapping("/language/level")
     public ResponseEntity<List<LevelRef>> getLevel() {
         try {
