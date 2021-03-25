@@ -19,10 +19,10 @@ public class Player implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="\"id\"")
-	private long id;
+	private Long id;
 
 	@Column(name="\"birth_country_ref_id\"")
-	private long birthCountryRefId;
+	private Long birthCountryRefId;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="\"birth_date\"")
@@ -35,10 +35,10 @@ public class Player implements Serializable {
 	private String firstName;
 
 	@Column(name="\"gender_ref_id\"")
-	private long genderRefId;
+	private Long genderRefId;
 
 	@Column(name="\"image_ref_id\"")
-	private long imageRefId;
+	private Long imageRefId;
 
 	@Column(name="\"last_name\"")
 	private String lastName;
@@ -60,8 +60,8 @@ public class Player implements Serializable {
 	}
 
 	public Player(
-		long id, long birthCountryRefId, Date birthDate, String email, 
-		String firstName, long genderRefId, long imageRefId,
+		Long id, Long birthCountryRefId, Date birthDate, String email, 
+		String firstName, Long genderRefId, Long imageRefId,
 		String lastName, String login, String password, String phone) {
 			this.id = id;
 			this.birthCountryRefId = birthCountryRefId;
@@ -76,19 +76,19 @@ public class Player implements Serializable {
 			this.phone = phone;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getBirthCountryRefId() {
+	public Long getBirthCountryRefId() {
 		return this.birthCountryRefId;
 	}
 
-	public void setBirthCountryRefId(long birthCountryRefId) {
+	public void setBirthCountryRefId(Long birthCountryRefId) {
 		this.birthCountryRefId = birthCountryRefId;
 	}
 
@@ -116,19 +116,19 @@ public class Player implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public long getGenderRefId() {
+	public Long getGenderRefId() {
 		return this.genderRefId;
 	}
 
-	public void setGenderRefId(long genderRefId) {
+	public void setGenderRefId(Long genderRefId) {
 		this.genderRefId = genderRefId;
 	}
 
-	public long getImageRefId() {
+	public Long getImageRefId() {
 		return this.imageRefId;
 	}
 
-	public void setImageRefId(long imageRefId) {
+	public void setImageRefId(Long imageRefId) {
 		this.imageRefId = imageRefId;
 	}
 

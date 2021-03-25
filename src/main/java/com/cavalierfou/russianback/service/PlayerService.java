@@ -123,10 +123,19 @@ public class PlayerService {
     }
 
     public PlayerCustom mapToCustom(Player player) {
-        Optional<BirthCountryRef> birthCountryRefOptional = birthCountryRefJpaRepository
-                .findById(player.getBirthCountryRefId());
-        Optional<GenderRef> genderRefOptional = genderRefJpaRepository.findById(player.getGenderRefId());
-        Optional<ImageRef> imageRefOptional = imageRefJpaRepository.findById(player.getImageRefId());
+        Optional<BirthCountryRef> birthCountryRefOptional = Optional.empty();
+        Optional<GenderRef> genderRefOptional = Optional.empty();
+        Optional<ImageRef> imageRefOptional = Optional.empty();
+        if (player.getBirthCountryRefId() != null) {
+            birthCountryRefOptional = birthCountryRefJpaRepository
+                    .findById(player.getBirthCountryRefId());
+        }
+        if (player.getGenderRefId() != null) {
+            genderRefOptional = genderRefJpaRepository.findById(player.getGenderRefId());
+        }
+        if (player.getImageRefId() != null) {
+            imageRefOptional = imageRefJpaRepository.findById(player.getImageRefId());
+        }
         List<PlayerSpokenLanguage> playerSpokenLanguages = player.getPlayerSpokenLanguages();
 
         PlayerCustom playerCustom = new PlayerCustom();
