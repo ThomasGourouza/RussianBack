@@ -25,7 +25,7 @@ class RussianAdjectiveController {
     @Autowired
     private RussianAdjectiveService russianAdjectiveService;
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<List<RussianAdjectiveCustom>> getRussianAdjectives(
             @RequestParam(value = "translation", required = false) String translation) {
@@ -40,7 +40,7 @@ class RussianAdjectiveController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{id}")
     public ResponseEntity<RussianAdjectiveCustom> getById(@PathVariable("id") Long id) {
         RussianAdjectiveCustom existingRussianAdjectiveCustom = russianAdjectiveService.findById(id);
@@ -51,7 +51,7 @@ class RussianAdjectiveController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     public ResponseEntity<RussianAdjectiveCustom> create(@RequestBody RussianAdjective russianAdjectiveToSave) {
         try {
@@ -61,7 +61,7 @@ class RussianAdjectiveController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("{id}")
     public ResponseEntity<RussianAdjectiveCustom> update(@PathVariable("id") Long id,
             @RequestBody RussianAdjective updatedRussianAdjective) {
@@ -77,7 +77,7 @@ class RussianAdjectiveController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id,
             @RequestParam(value = "force", required = false) boolean force) {

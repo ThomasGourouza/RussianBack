@@ -27,7 +27,7 @@ class RussianNounController {
     @Autowired
     private RussianNounService russianNounService;
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<List<RussianNounCustom>> getRussianNouns(
             @RequestParam(value = "translation", required = false) String translation) {
@@ -42,7 +42,7 @@ class RussianNounController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{id}")
     public ResponseEntity<RussianNounCustom> getById(@PathVariable("id") Long id) {
         RussianNounCustom existingRussianNounCustom = russianNounService.findById(id);
@@ -53,7 +53,7 @@ class RussianNounController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("{id}")
     public ResponseEntity<RussianNounCustom> update(@PathVariable("id") Long id,
             @RequestBody RussianNoun updatedRussianNoun) {
@@ -69,7 +69,7 @@ class RussianNounController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     public ResponseEntity<RussianNounCustom> create(@RequestBody RussianNoun russianNounToSave) {
         try {
@@ -79,7 +79,7 @@ class RussianNounController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id,
             @RequestParam(value = "force", required = false) boolean force) {
@@ -95,7 +95,7 @@ class RussianNounController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/singular_plural")
     public ResponseEntity<HttpStatus> associate(
             @RequestBody RussianSingularPluralNounCouple russianSingularPluralNounCouple) {
@@ -113,7 +113,7 @@ class RussianNounController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/singular_plural")
     public ResponseEntity<HttpStatus> dissociateByNounId(
             @RequestParam(value = "noun_id", required = true) Long nounId) {
@@ -129,7 +129,7 @@ class RussianNounController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/specific_rule")
     public ResponseEntity<HttpStatus> saveRule(
             @RequestBody MemoryRussianSpecificNounEnding memoryRussianSpecificNounEnding) {
@@ -145,7 +145,7 @@ class RussianNounController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/specific_rule")
     public ResponseEntity<HttpStatus> deleteRule(@RequestParam(value = "noun_id", required = true) Long nounId,
             @RequestParam(value = "spec_id", required = false) Long russianDeclSpecEndingRefId) {

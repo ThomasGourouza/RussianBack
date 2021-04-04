@@ -25,7 +25,7 @@ class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     public ResponseEntity<List<PlayerCustom>> getPlayers(
             @RequestParam(value = "login", required = false) String login,
@@ -42,7 +42,7 @@ class PlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/login/{login}")
     public ResponseEntity<Void> getLogin(@PathVariable("login") String login) {
         try {
@@ -55,7 +55,7 @@ class PlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{id}")
     public ResponseEntity<PlayerCustom> getById(@PathVariable("id") Long id) {
         PlayerCustom existingPlayerCustom = playerService.findById(id);
@@ -66,7 +66,7 @@ class PlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     public ResponseEntity<PlayerCustom> create(@RequestBody Player playerToSave) {
         try {
@@ -76,7 +76,7 @@ class PlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("{id}")
     public ResponseEntity<PlayerCustom> update(@PathVariable("id") Long id, @RequestBody Player updatedPlayer) {
         Player player = playerService.update(id, updatedPlayer);
@@ -91,7 +91,7 @@ class PlayerController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:53184")
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id,
             @RequestParam(value = "force", required = false) boolean force) {
