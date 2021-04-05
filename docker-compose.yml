@@ -6,7 +6,7 @@ services:
 
   # PostgreSQL DataBase for the application
   russian-db:
-    image: thomasgourouza/russian-db:data
+    image: thomasgourouza/russian-db:postgres
     container_name: russian-db
     # Volume mounted for database for the storage
     volumes:
@@ -17,7 +17,7 @@ services:
     environment: 
       - PGDATA=data-russian
 
-  # Back-end Spring Boot Application
+  # Backend Spring Boot application
   russian-back:
     # Either use image or build
     image: thomasgourouza/russian-backend:springboot
@@ -33,6 +33,15 @@ services:
       - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
     links: 
       - russian-db
+
+  # Frontend Angular 11 application
+  russian-front:
+    image: thomasgourouza/russian-frontend:angular11
+    container_name: russian-front
+    ports:
+      - 4200:80
+    links:
+      - russian-back
 
 #Volumes for DB data
 volumes:
