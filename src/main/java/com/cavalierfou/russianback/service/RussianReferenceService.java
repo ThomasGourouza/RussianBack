@@ -89,8 +89,8 @@ public class RussianReferenceService {
     }
 
     public List<RussianDeclSpecRuleRef> findRule() {
-		return rDSRuleRefJpaRepository.findAll();
-	}
+        return rDSRuleRefJpaRepository.findAll();
+    }
 
     public List<RussianGrammaticalNumberRef> findGrammaticalNumber() {
         return rGNumberRefJpaRepository.findAll();
@@ -139,7 +139,7 @@ public class RussianReferenceService {
 
         rAdjectiveCategoryRefJpaRepository.findAll()
                 .forEach(russianAdjectiveCategoryRef -> russianAdjectiveCategoryRefCustoms
-                        .add(mapRACRC(russianAdjectiveCategoryRef)));
+                        .add(mapRACRC(russianAdjectiveCategoryRef, null, false)));
 
         return russianAdjectiveCategoryRefCustoms;
     }
@@ -148,7 +148,7 @@ public class RussianReferenceService {
         Optional<RussianAdjectiveCategoryRef> existingRussianAdjectiveCategoryRefOptional = rAdjectiveCategoryRefJpaRepository
                 .findById(id);
         if (existingRussianAdjectiveCategoryRefOptional.isPresent()) {
-            return mapRACRC(existingRussianAdjectiveCategoryRefOptional.get());
+            return mapRACRC(existingRussianAdjectiveCategoryRefOptional.get(), null, false);
         } else {
             return null;
         }
@@ -262,16 +262,18 @@ public class RussianReferenceService {
         return rdserCustom;
     }
 
-    public RussianAdjectiveCategoryRefCustom mapRACRC(RussianAdjectiveCategoryRef russianAdjectiveCategoryRef) {
+    public RussianAdjectiveCategoryRefCustom mapRACRC(RussianAdjectiveCategoryRef russianAdjectiveCategoryRef,
+            String lastLetterOfRoot, boolean stressed) {
         RussianAdjectiveCategoryRefCustom russianAdjectiveCategoryRefCustom = new RussianAdjectiveCategoryRefCustom();
         russianAdjectiveCategoryRefCustom.setId(russianAdjectiveCategoryRef.getId());
         russianAdjectiveCategoryRefCustom.setValue(russianAdjectiveCategoryRef.getValue());
-        russianAdjectiveCategoryRefCustom.setEndings(mapRAERC(russianAdjectiveCategoryRef.getId()));
+        russianAdjectiveCategoryRefCustom.setEndings(mapRAERC(russianAdjectiveCategoryRef.getId(), lastLetterOfRoot, stressed));
 
         return russianAdjectiveCategoryRefCustom;
     }
 
-    private List<RussianAdjectiveEndingRefCustom> mapRAERC(Long russianAdjectiveCategoryRefId) {
+    private List<RussianAdjectiveEndingRefCustom> mapRAERC(Long russianAdjectiveCategoryRefId,
+            String lastLetterOfRoot, boolean stressed) {
         List<RussianAdjectiveEndingRefCustom> russianAdjectiveEndingRefCustoms = new ArrayList<>();
         russianAdjectiveEndingRefJpaRepository.findByRussianAdjectiveCategoryRefId(russianAdjectiveCategoryRefId)
                 .forEach(existingRussianAdjectiveEndingRef -> {
@@ -282,12 +284,50 @@ public class RussianReferenceService {
                     russianGenderRefJpaRepository.findById(existingRussianAdjectiveEndingRef.getRussianGenderRefId())
                             .ifPresent(russianGender -> russianAdjectiveEndingRefCustom
                                     .setRussianGender(russianGender.getValue()));
-                    russianAdjectiveEndingRefCustom.setValue(existingRussianAdjectiveEndingRef.getValue());
+
+                    String endingValue = existingRussianAdjectiveEndingRef.getValue();
+                    // Application of the Russian Spelling Rules
+                    if (lastLetterOfRoot != null) {
+                        List<String> velarLetters = List.of("г", "к", "х");
+                        List<String> sibilantLetters = List.of("ж", "ч", "ш", "щ");
+                        String ts = "ц";
+                        Boolean isVelar = velarLetters.contains(lastLetterOfRoot);
+                        Boolean isSibilant = sibilantLetters.contains(lastLetterOfRoot);
+                        Boolean isTs = ts.equals(lastLetterOfRoot);
+                        // After velar letters, sibilant letters or "ц"
+                        if (isVelar || isSibilant || isTs) {
+                            // After velar or sibilant letters
+                            if (!isTs) {
+                                // Spelling Rule 1: Never write the letter "ы", use "и" instead
+                                endingValue = replaceIfNeeded(endingValue, "ы", "и");
+                            }
+                            // After sibilant letters or "ц"
+                            if (!isVelar && !stressed) {
+                                // Spelling Rule 2: Never write an unstressed "о", use "е" instead
+                                endingValue = replaceIfNeeded(endingValue, "о", "е");
+                            }
+                            // Spelling Rule 3: Never write the letter "я", use "а" instead
+                            endingValue = replaceIfNeeded(endingValue, "я", "а");
+                            // Spelling Rule 4: Never write the letter "ю", use "у" instead
+                            endingValue = replaceIfNeeded(endingValue, "ю", "у");
+                        }
+                    }
+
+                    russianAdjectiveEndingRefCustom.setValue(endingValue);
 
                     russianAdjectiveEndingRefCustoms.add(russianAdjectiveEndingRefCustom);
                 });
 
         return russianAdjectiveEndingRefCustoms;
+    }
+
+    private String replaceIfNeeded(String endingValue, String letterToReplace, String newLetter) {
+        String firstLetterOfEnding = String.valueOf(endingValue.charAt(0));
+        if (letterToReplace.equals(firstLetterOfEnding)) {
+            String restOfEnding = endingValue.substring(1);
+            return newLetter + restOfEnding;
+        }
+        return endingValue;
     }
 
 }
