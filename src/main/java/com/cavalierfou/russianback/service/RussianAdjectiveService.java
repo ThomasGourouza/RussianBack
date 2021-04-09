@@ -84,10 +84,15 @@ public class RussianAdjectiveService {
         russianAdjectiveCustom.setId(russianAdjective.getId());
         russianAdjectiveCustom.setRoot(russianAdjective.getRoot());
         russianAdjectiveCustom.setTranslation(russianAdjective.getTranslation());
+        boolean isStressed = russianAdjective.getRussianAdjectiveCategoryRefId() == 2;
+
+        String lastLetterOfRoot = String
+                .valueOf(russianAdjective.getRoot().charAt(russianAdjective.getRoot().length() - 1));
 
         russianAdjectiveCategoryRefJpaRepository.findById(russianAdjective.getRussianAdjectiveCategoryRefId())
                 .ifPresent(russianAdjectiveCategoryRef -> {
-                    russianAdjectiveCustom.setCategory(russianReferenceService.mapRACRC(russianAdjectiveCategoryRef));
+                    russianAdjectiveCustom.setCategory(russianReferenceService.mapRACRC(russianAdjectiveCategoryRef,
+                            lastLetterOfRoot, isStressed));
                     setNominativeMasculineForm(russianAdjectiveCustom, russianAdjectiveCustom.getCategory());
                 });
 
