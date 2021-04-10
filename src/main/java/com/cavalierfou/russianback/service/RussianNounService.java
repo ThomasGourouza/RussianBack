@@ -117,10 +117,10 @@ public class RussianNounService {
         }
     }
 
-    public void addRule(MemoryRussianSpecificNounEnding memoryRussianSpecificNounEnding) {
+    public void addRules(List<MemoryRussianSpecificNounEnding> memoryRussianSpecificNounEndings) {
         jdbcRepository.resetSequence(Constant.MRSNE.getValue(), Constant.MRSNEIS.getValue());
 
-        memoryRSNEndingJpaRepository.save(memoryRussianSpecificNounEnding);
+        memoryRSNEndingJpaRepository.saveAll(memoryRussianSpecificNounEndings);
     }
 
     public void removeRule(Long nounId, Long russianDeclSpecEndingRefId) {

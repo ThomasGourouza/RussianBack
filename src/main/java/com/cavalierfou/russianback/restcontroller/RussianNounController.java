@@ -132,10 +132,17 @@ class RussianNounController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/specific_rule")
     public ResponseEntity<HttpStatus> saveRule(
-            @RequestBody MemoryRussianSpecificNounEnding memoryRussianSpecificNounEnding) {
-        if (russianNounService.isPresent(memoryRussianSpecificNounEnding.getRussianNounId())) {
+            @RequestBody List<MemoryRussianSpecificNounEnding> memoryRussianSpecificNounEndings) {
+        boolean[] found = new boolean[1];
+        found[0] = true;
+        memoryRussianSpecificNounEndings.forEach(spec -> {
+            if (!russianNounService.isPresent(spec.getRussianNounId())) {
+                found[0] = false;
+            }
+        });
+        if (found[0]) {
             try {
-                russianNounService.addRule(memoryRussianSpecificNounEnding);
+                russianNounService.addRules(memoryRussianSpecificNounEndings);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
