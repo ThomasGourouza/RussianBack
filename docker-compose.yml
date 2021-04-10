@@ -35,13 +35,13 @@ services:
       - russian-db
 
   # Frontend Angular 11 application
-  # russian-front:
-  #   image: thomasgourouza/russian-frontend:angular11
-  #   container_name: russian-front
-  #   ports:
-  #     - 4200:80
-  #   links:
-  #     - russian-back
+  russian-front:
+    image: thomasgourouza/russian-frontend:angular11
+    container_name: russian-front
+    ports:
+      - 4200:80
+    links:
+      - russian-back
 
 #Volumes for DB data
 volumes:
