@@ -357,6 +357,60 @@
 					]
 				},
 				{
+					"name": "player/login",
+					"item": [
+						{
+							"name": "player by login",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/player/login/Cavalier_Fou",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"player",
+										"login",
+										"Cavalier_Fou"
+									],
+									"query": [
+										{
+											"key": "password",
+											"value": "mdpkl",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
 					"name": "player",
 					"request": {
 						"method": "GET",
@@ -438,7 +492,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/player?languageIds=1,4",
+							"raw": "localhost:8080/api/v1/player?languageIds=1,11",
 							"host": [
 								"localhost"
 							],
@@ -451,7 +505,7 @@
 							"query": [
 								{
 									"key": "languageIds",
-									"value": "1,4"
+									"value": "1,11"
 								}
 							]
 						}
@@ -517,6 +571,35 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"birthCountryRefId\": 3,\r\n    \"birthDate\": \"1983-08-15\",\r\n    \"email\": \"testrrr@moonfruit.com\",\r\n    \"firstName\": \"Coco\",\r\n    \"genderRefId\": 1,\r\n    \"imageRefId\": 2,\r\n    \"lastName\": \"Bandicoot\",\r\n    \"login\": \"cocoB\",\r\n    \"password\": \"psswd\",\r\n    \"phone\": \"0671933440\",\r\n    \"playerSpokenLanguages\": [\r\n        {\r\n            \"certification\": \"TEST1\",\r\n            \"languageRefId\": 1,\r\n            \"levelRefId\": 5\r\n        },\r\n        {\r\n            \"certification\": \"TEST2\",\r\n            \"languageRefId\": 5,\r\n            \"levelRefId\": 4\r\n        },\r\n        {\r\n            \"certification\": \"TEST3\",\r\n            \"languageRefId\": 8,\r\n            \"levelRefId\": 4\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/player",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "player Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"birthCountryRefId\": \"10\",\r\n    \"birthDate\": \"2021-02-09\",\r\n    \"email\": \"alz0@laposte.net\",\r\n    \"firstName\": \"Juan\",\r\n    \"genderRefId\": \"1\",\r\n    \"imageRefId\": \"4\",\r\n    \"lastName\": \"ValJuano\",\r\n    \"login\": \"tom\",\r\n    \"password\": \"c\",\r\n    \"phone\": \"0671933440\",\r\n    \"playerSpokenLanguages\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -617,7 +700,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"root\": \"хорош\",\r\n    \"russianAdjectiveCategoryRefId\": 3,\r\n    \"translation\": \"good\"\r\n}",
+							"raw": "{\r\n    \"root\": \"suppr\",\r\n    \"russianAdjectiveCategoryRefId\": 1,\r\n    \"translation\": \"suppr\",\r\n    \"isStressed\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -646,7 +729,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"root\": \"хорош\",\r\n    \"russianAdjectiveCategoryRefId\": 3,\r\n    \"translation\": \"good\"\r\n}",
+							"raw": "{\r\n    \"root\": \"suppr\",\r\n    \"russianAdjectiveCategoryRefId\": 1,\r\n    \"translation\": \"suppr\",\r\n    \"isStressed\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -654,7 +737,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/adjective/5",
+							"raw": "localhost:8080/api/v1/adjective/21",
 							"host": [
 								"localhost"
 							],
@@ -663,7 +746,7 @@
 								"api",
 								"v1",
 								"adjective",
-								"5"
+								"21"
 							]
 						}
 					},
@@ -675,7 +758,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/adjective/5",
+							"raw": "localhost:8080/api/v1/adjective/7",
 							"host": [
 								"localhost"
 							],
@@ -684,7 +767,7 @@
 								"api",
 								"v1",
 								"adjective",
-								"5"
+								"7"
 							]
 						}
 					},
@@ -705,7 +788,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"russianSingularNounId\": 9,\r\n    \"russianPluralNounId\": 10\r\n}",
+									"raw": "{\r\n    \"russianSingularNounId\": 7,\r\n    \"russianPluralNounId\": 8\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -729,12 +812,12 @@
 							"response": []
 						},
 						{
-							"name": "singular_plural_couple",
+							"name": "singular_plural_couple with noun_id parameter",
 							"request": {
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/api/v1/noun/singular_plural/9",
+									"raw": "localhost:8080/api/v1/noun/singular_plural?noun_id=7",
 									"host": [
 										"localhost"
 									],
@@ -743,8 +826,13 @@
 										"api",
 										"v1",
 										"noun",
-										"singular_plural",
-										"9"
+										"singular_plural"
+									],
+									"query": [
+										{
+											"key": "noun_id",
+											"value": "7"
+										}
 									]
 								}
 							},
@@ -782,7 +870,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"russianNounId\": 1,\r\n    \"russianDeclSpecEndingRefId\": 11\r\n}",
+									"raw": "[\r\n    {\r\n        \"russianNounId\": 8,\r\n        \"russianDeclSpecEndingRefId\": 4\r\n    },\r\n    {\r\n        \"russianNounId\": 9,\r\n        \"russianDeclSpecEndingRefId\": 13\r\n    }\r\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -806,7 +894,7 @@
 							"response": []
 						},
 						{
-							"name": "specific_rule with noun_id parameters",
+							"name": "specific_rule with noun_id parameter",
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -838,7 +926,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/api/v1/noun/specific_rule?noun_id=1&spec_id=11",
+									"raw": "localhost:8080/api/v1/noun/specific_rule?noun_id=2&spec_id=18",
 									"host": [
 										"localhost"
 									],
@@ -852,11 +940,11 @@
 									"query": [
 										{
 											"key": "noun_id",
-											"value": "1"
+											"value": "2"
 										},
 										{
 											"key": "spec_id",
-											"value": "11"
+											"value": "18"
 										}
 									]
 								}
@@ -891,7 +979,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/noun/5",
+							"raw": "localhost:8080/api/v1/noun/10",
 							"host": [
 								"localhost"
 							],
@@ -900,7 +988,7 @@
 								"api",
 								"v1",
 								"noun",
-								"5"
+								"10"
 							]
 						}
 					},
@@ -960,7 +1048,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"isAnimate\": true,\r\n    \"root\": \"lam\",\r\n    \"russianNounCategoryRefId\": 10,\r\n    \"translation\": \"lamas\"\r\n}",
+							"raw": "{\r\n    \"isAnimate\": true,\r\n    \"root\": \"Test\",\r\n    \"russianNounCategoryRefId\": 12,\r\n    \"translation\": \"Tests\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1259,6 +1347,34 @@
 											"response": []
 										}
 									]
+								},
+								{
+									"name": "reference/russian/declension/rule",
+									"item": [
+										{
+											"name": "rule",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:8080/api/v1/reference/russian/declension/rule",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"api",
+														"v1",
+														"reference",
+														"russian",
+														"declension",
+														"rule"
+													]
+												}
+											},
+											"response": []
+										}
+									]
 								}
 							]
 						},
@@ -1298,7 +1414,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "localhost:8080/api/v1/reference/russian/gender",
+											"raw": "localhost:8080/api/v1/reference/russian/grammatical_number",
 											"host": [
 												"localhost"
 											],
@@ -1308,7 +1424,7 @@
 												"v1",
 												"reference",
 												"russian",
-												"gender"
+												"grammatical_number"
 											]
 										}
 									},
@@ -1325,7 +1441,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "localhost:8080/api/v1/russian_reference/russian_gender",
+											"raw": "localhost:8080/api/v1/reference/russian/gender",
 											"host": [
 												"localhost"
 											],
@@ -1333,8 +1449,9 @@
 											"path": [
 												"api",
 												"v1",
-												"russian_reference",
-												"russian_gender"
+												"reference",
+												"russian",
+												"gender"
 											]
 										}
 									},
@@ -1431,7 +1548,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "localhost:8080/api/v1/reference/russian/category/noun_category?is_noun_animate=false",
+													"raw": "localhost:8080/api/v1/reference/russian/category/noun_category?is_noun_animate=true",
 													"host": [
 														"localhost"
 													],
@@ -1447,7 +1564,7 @@
 													"query": [
 														{
 															"key": "is_noun_animate",
-															"value": "false"
+															"value": "true"
 														}
 													]
 												}
@@ -1460,7 +1577,7 @@
 												"method": "GET",
 												"header": [],
 												"url": {
-													"raw": "localhost:8080/api/v1/reference/russian/category/noun_category/10",
+													"raw": "localhost:8080/api/v1/reference/russian/category/noun_category/15",
 													"host": [
 														"localhost"
 													],
@@ -1472,7 +1589,7 @@
 														"russian",
 														"category",
 														"noun_category",
-														"10"
+														"15"
 													]
 												}
 											},
